@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC8B5696-E761-4AFB-88D4-CA79E7BC3648}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>libSys</RootNamespace>
+    <AssemblyName>libSys</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.38.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Docking">
+      <HintPath>..\..\..\..\..\Downloads\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator">
+      <HintPath>..\..\..\..\..\Downloads\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon">
+      <HintPath>..\..\..\..\..\Downloads\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit">
+      <HintPath>..\..\..\..\..\Downloads\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace">
+      <HintPath>..\..\..\..\..\Downloads\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Workspace.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Cryptography, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Bcl.Cryptography.8.0.0\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.SqlClient, Version=6.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Data.SqlClient.6.0.1\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.Caching.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.Caching.Memory.8.0.1\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Identity.Client.4.61.3\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=4.61.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.Identity.Client.Extensions.Msal.4.61.3\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.Abstractions.7.5.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.JsonWebTokens.7.5.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.Logging.7.5.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.Protocols.7.5.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.7.5.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\Microsoft.IdentityModel.Tokens.7.5.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ClientModel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.IdentityModel.Tokens.Jwt.7.5.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Security.Cryptography.Pkcs.8.0.1\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Text.Json.6.0.10\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\LibrarySystem\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\CountryCode.cs" />
+    <Compile Include="Classes\CurrentUser.cs" />
+    <Compile Include="Classes\Forms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Classes\Functions.cs" />
+    <Compile Include="Classes\GlobalConfig.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\Validator.cs" />
+    <Compile Include="ExtendedForms\BookDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtendedForms\BookDetails.Designer.cs">
+      <DependentUpon>BookDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedForms\CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtendedForms\CustomMessageBox.Designer.cs">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedForms\LoadingScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtendedForms\LoadingScreen.Designer.cs">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedForms\PenaltyFee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtendedForms\PenaltyFee.Designer.cs">
+      <DependentUpon>PenaltyFee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\BorrowBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\BorrowBook.Designer.cs">
+      <DependentUpon>BorrowBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\FrontPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\FrontPage.Designer.cs">
+      <DependentUpon>FrontPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\ManageBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\ManageBooks.Designer.cs">
+      <DependentUpon>ManageBooks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\MembersInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\MembersInfo.Designer.cs">
+      <DependentUpon>MembersInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\PendingRequests.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\PendingRequests.Designer.cs">
+      <DependentUpon>PendingRequests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsFolder\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsFolder\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ExtendedForms\BookDetails.resx">
+      <DependentUpon>BookDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtendedForms\CustomMessageBox.resx">
+      <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtendedForms\LoadingScreen.resx">
+      <DependentUpon>LoadingScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtendedForms\PenaltyFee.resx">
+      <DependentUpon>PenaltyFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\BorrowBook.resx">
+      <DependentUpon>BorrowBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\FrontPage.resx">
+      <DependentUpon>FrontPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\ManageBooks.resx">
+      <DependentUpon>ManageBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\MembersInfo.resx">
+      <DependentUpon>MembersInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\PendingRequests.resx">
+      <DependentUpon>PendingRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsFolder\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\libSys.Properties.Resources.resources" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\libSys.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\libSys.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\libSys.csproj.GenerateResource.cache" />
+    <None Include="packages.config" />
+    <None Include="packages\Azure.Core.1.38.0\.signature.p7s" />
+    <None Include="packages\Azure.Core.1.38.0\Azure.Core.1.38.0.nupkg" />
+    <None Include="packages\Azure.Core.1.38.0\CHANGELOG.md" />
+    <None Include="packages\Azure.Core.1.38.0\README.md" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\.signature.p7s" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\buildTransitive\net461\Microsoft.Bcl.AsyncInterfaces.targets" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\buildTransitive\net462\_._" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\buildTransitive\net8.0\_._" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\buildTransitive\netcoreapp2.0\Microsoft.Bcl.AsyncInterfaces.targets" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\Microsoft.Bcl.AsyncInterfaces.9.0.1.nupkg" />
+    <None Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\PACKAGE.md" />
+    <None Include="packages\Microsoft.Data.SqlClient.5.2.2\.signature.p7s" />
+    <None Include="packages\Microsoft.Data.SqlClient.5.2.2\Microsoft.Data.SqlClient.5.2.2.nupkg" />
+    <None Include="packages\Microsoft.Identity.Client.4.61.3\.signature.p7s" />
+    <None Include="packages\Microsoft.Identity.Client.4.61.3\Microsoft.Identity.Client.4.61.3.nupkg" />
+    <None Include="packages\Microsoft.Identity.Client.4.61.3\README.md" />
+    <None Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\Microsoft.IdentityModel.Abstractions.8.3.1.nupkg" />
+    <None Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\README.md" />
+    <None Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\Microsoft.IdentityModel.JsonWebTokens.6.35.0.nupkg" />
+    <None Include="packages\Microsoft.IdentityModel.Logging.6.35.0\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.Logging.6.35.0\Microsoft.IdentityModel.Logging.6.35.0.nupkg" />
+    <None Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\Microsoft.IdentityModel.Protocols.6.35.0.nupkg" />
+    <None Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0.nupkg" />
+    <None Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\.signature.p7s" />
+    <None Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\Microsoft.IdentityModel.Tokens.6.35.0.nupkg" />
+    <None Include="packages\System.Buffers.4.6.0\.signature.p7s" />
+    <None Include="packages\System.Buffers.4.6.0\buildTransitive\net461\System.Buffers.targets" />
+    <None Include="packages\System.Buffers.4.6.0\buildTransitive\net462\_._" />
+    <None Include="packages\System.Buffers.4.6.0\lib\netcoreapp2.1\_._" />
+    <None Include="packages\System.Buffers.4.6.0\PACKAGE.md" />
+    <None Include="packages\System.Buffers.4.6.0\System.Buffers.4.6.0.nupkg" />
+    <None Include="packages\System.Configuration.ConfigurationManager.6.0.1\.signature.p7s" />
+    <None Include="packages\System.Configuration.ConfigurationManager.6.0.1\buildTransitive\netcoreapp2.0\System.Configuration.ConfigurationManager.targets" />
+    <None Include="packages\System.Configuration.ConfigurationManager.6.0.1\buildTransitive\netcoreapp3.1\_._" />
+    <None Include="packages\System.Configuration.ConfigurationManager.6.0.1\System.Configuration.ConfigurationManager.6.0.1.nupkg" />
+    <None Include="packages\System.IO.FileSystem.AccessControl.5.0.0\.signature.p7s" />
+    <None Include="packages\System.IO.FileSystem.AccessControl.5.0.0\System.IO.FileSystem.AccessControl.5.0.0.nupkg" />
+    <None Include="packages\System.Memory.4.5.4\.signature.p7s" />
+    <None Include="packages\System.Memory.4.5.4\lib\netcoreapp2.1\_._" />
+    <None Include="packages\System.Memory.4.5.4\ref\netcoreapp2.1\_._" />
+    <None Include="packages\System.Memory.4.5.4\System.Memory.4.5.4.nupkg" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\.signature.p7s" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\buildTransitive\net461\System.Runtime.CompilerServices.Unsafe.targets" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\buildTransitive\net462\_._" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\buildTransitive\net6.0\_._" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\buildTransitive\netcoreapp2.0\System.Runtime.CompilerServices.Unsafe.targets" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net7.0\_._" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\PACKAGE.md" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\System.Runtime.CompilerServices.Unsafe.6.1.0.nupkg" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\.signature.p7s" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\MonoAndroid10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\MonoTouch10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\xamarinios10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\xamarinmac20\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\xamarintvos10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\xamarinwatchos10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\MonoAndroid10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\MonoTouch10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\xamarinios10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\xamarinmac20\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\xamarintvos10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\xamarinwatchos10\_._" />
+    <None Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\System.Runtime.InteropServices.RuntimeInformation.4.3.0.nupkg" />
+    <None Include="packages\System.Security.AccessControl.6.0.1\.signature.p7s" />
+    <None Include="packages\System.Security.AccessControl.6.0.1\buildTransitive\netcoreapp2.0\System.Security.AccessControl.targets" />
+    <None Include="packages\System.Security.AccessControl.6.0.1\buildTransitive\netcoreapp3.1\_._" />
+    <None Include="packages\System.Security.AccessControl.6.0.1\System.Security.AccessControl.6.0.1.nupkg" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\.signature.p7s" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\MonoAndroid10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\MonoTouch10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\xamarinios10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\xamarinmac20\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\xamarintvos10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\xamarinwatchos10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\MonoAndroid10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\MonoTouch10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\xamarinios10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\xamarinmac20\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\xamarintvos10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\xamarinwatchos10\_._" />
+    <None Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\System.Security.Cryptography.ProtectedData.4.7.0.nupkg" />
+    <None Include="packages\System.Security.Permissions.6.0.0\.signature.p7s" />
+    <None Include="packages\System.Security.Permissions.6.0.0\buildTransitive\netcoreapp2.0\System.Security.Permissions.targets" />
+    <None Include="packages\System.Security.Permissions.6.0.0\buildTransitive\netcoreapp3.1\_._" />
+    <None Include="packages\System.Security.Permissions.6.0.0\System.Security.Permissions.6.0.0.nupkg" />
+    <None Include="packages\System.Security.Principal.Windows.5.0.0\.signature.p7s" />
+    <None Include="packages\System.Security.Principal.Windows.5.0.0\lib\uap10.0.16299\_._" />
+    <None Include="packages\System.Security.Principal.Windows.5.0.0\ref\uap10.0.16299\_._" />
+    <None Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\uap10.0.16299\_._" />
+    <None Include="packages\System.Security.Principal.Windows.5.0.0\System.Security.Principal.Windows.5.0.0.nupkg" />
+    <None Include="packages\System.Text.Encoding.4.3.0\.signature.p7s" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\MonoAndroid10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\MonoTouch10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\net45\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\portable-net45+win8+wp8+wpa81\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\win8\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\wp80\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\wpa81\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\xamarinios10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\xamarinmac20\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\xamarintvos10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\lib\xamarinwatchos10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\MonoAndroid10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\MonoTouch10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\net45\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\portable-net45+win8+wp8+wpa81\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\win8\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\wp80\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\wpa81\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\xamarinios10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\xamarinmac20\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\xamarintvos10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\ref\xamarinwatchos10\_._" />
+    <None Include="packages\System.Text.Encoding.4.3.0\System.Text.Encoding.4.3.0.nupkg" />
+    <None Include="packages\System.Text.Json.4.7.2\.signature.p7s" />
+    <None Include="packages\System.Text.Json.4.7.2\System.Text.Json.4.7.2.nupkg" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\.signature.p7s" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\buildTransitive\net461\System.Threading.Tasks.Extensions.targets" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\buildTransitive\net462\_._" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\lib\netcoreapp2.1\_._" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\PACKAGE.md" />
+    <None Include="packages\System.Threading.Tasks.Extensions.4.6.0\System.Threading.Tasks.Extensions.4.6.0.nupkg" />
+    <None Include="packages\System.ValueTuple.4.5.0\.signature.p7s" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\MonoAndroid10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\MonoTouch10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\netcoreapp2.0\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\netstandard2.0\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\uap10.0.16299\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\xamarinios10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\xamarinmac20\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\xamarintvos10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\lib\xamarinwatchos10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\MonoAndroid10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\MonoTouch10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\netcoreapp2.0\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\netstandard2.0\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\uap10.0.16299\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\xamarinios10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\xamarinmac20\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\xamarintvos10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\ref\xamarinwatchos10\_._" />
+    <None Include="packages\System.ValueTuple.4.5.0\System.ValueTuple.4.5.0.nupkg" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="obj\Debug\libSys.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Resources\Bookshop_Brand_Identity__Logo__Branding-removebg-preview.png" />
+    <Content Include="obj\Resources\circle-xmark-regular%281%29.png" />
+    <Content Include="obj\Resources\error.png" />
+    <Content Include="obj\Resources\hide.png" />
+    <Content Include="obj\Resources\HIlda Season 1 %28Netflix%29.jpg" />
+    <Content Include="obj\Resources\HIlda_Season_1_%28Netflix%29_LE_auto_x4-transformed.jpeg" />
+    <Content Include="obj\Resources\information.png" />
+    <Content Include="obj\Resources\Library Animation Background%281%29.jpg" />
+    <Content Include="obj\Resources\Library_Animation_Background%281%29_LE_auto_x4-transformed.jpeg" />
+    <Content Include="obj\Resources\photo_2024-11-26_10-04-22-removebg-preview.png" />
+    <Content Include="obj\Resources\photo_2024-11-26_10-04-22-removebg-preview1.png" />
+    <Content Include="obj\Resources\question.png" />
+    <Content Include="obj\Resources\show.png" />
+    <Content Include="obj\Resources\success.png" />
+    <Content Include="obj\Resources\warning.png" />
+    <Content Include="packages\Azure.Core.1.38.0\azureicon.png" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net461\Azure.Core.dll" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net461\Azure.Core.xml" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net472\Azure.Core.dll" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net472\Azure.Core.xml" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net6.0\Azure.Core.dll" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\net6.0\Azure.Core.xml" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\netstandard2.0\Azure.Core.dll" />
+    <Content Include="packages\Azure.Core.1.38.0\lib\netstandard2.0\Azure.Core.xml" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\Icon.png" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.xml" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.xml" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\netstandard2.1\Microsoft.Bcl.AsyncInterfaces.xml" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\LICENSE.TXT" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\useSharedDesignerContext.txt" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\dotnet.png" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\de\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\es\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\it\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net462\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\de\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\es\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\it\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net6.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\de\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\es\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\it\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\de\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\es\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\it\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\de\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\es\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\fr\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\it\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\ja\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\ko\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\pt-BR\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\ru\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\zh-Hans\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\lib\netstandard2.1\zh-Hant\Microsoft.Data.SqlClient.resources.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net462\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net462\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net6.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net6.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net8.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\net8.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\netstandard2.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\netstandard2.0\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\netstandard2.1\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\ref\netstandard2.1\Microsoft.Data.SqlClient.xml" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\unix\lib\netstandard2.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\unix\lib\netstandard2.1\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\win\lib\net462\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\win\lib\netstandard2.0\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Data.SqlClient.5.2.2\runtimes\win\lib\netstandard2.1\Microsoft.Data.SqlClient.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net462\Microsoft.Identity.Client.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net462\Microsoft.Identity.Client.xml" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0-android31.0\Microsoft.Identity.Client.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0-android31.0\Microsoft.Identity.Client.xml" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0-ios15.4\Microsoft.Identity.Client.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0-ios15.4\Microsoft.Identity.Client.xml" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0\Microsoft.Identity.Client.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\net6.0\Microsoft.Identity.Client.xml" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\netstandard2.0\Microsoft.Identity.Client.dll" />
+    <Content Include="packages\Microsoft.Identity.Client.4.61.3\lib\netstandard2.0\Microsoft.Identity.Client.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net462\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net462\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net472\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net472\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net6.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net6.0\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net8.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net8.0\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net9.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\net9.0\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\netstandard2.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Abstractions.8.3.1\lib\netstandard2.0\Microsoft.IdentityModel.Abstractions.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net462\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net462\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\net6.0\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.JsonWebTokens.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net45\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net45\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net461\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net461\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net462\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net462\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net472\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net472\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net6.0\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\net6.0\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Logging.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net45\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net45\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net461\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net461\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net462\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net462\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net6.0\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\net6.0\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net45\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net45\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net462\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net462\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net45\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net45\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net461\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net461\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net462\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net462\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net472\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net472\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net6.0\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\net6.0\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="packages\Microsoft.IdentityModel.Tokens.6.35.0\lib\netstandard2.0\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="packages\System.Buffers.4.6.0\Icon.png" />
+    <Content Include="packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll" />
+    <Content Include="packages\System.Buffers.4.6.0\lib\net462\System.Buffers.xml" />
+    <Content Include="packages\System.Buffers.4.6.0\lib\netstandard2.0\System.Buffers.dll" />
+    <Content Include="packages\System.Buffers.4.6.0\lib\netstandard2.0\System.Buffers.xml" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\Icon.png" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\net461\System.Configuration.ConfigurationManager.dll" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\net461\System.Configuration.ConfigurationManager.xml" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\net6.0\System.Configuration.ConfigurationManager.dll" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\net6.0\System.Configuration.ConfigurationManager.xml" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\netstandard2.0\System.Configuration.ConfigurationManager.dll" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\lib\netstandard2.0\System.Configuration.ConfigurationManager.xml" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\LICENSE.TXT" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\runtimes\win\lib\net461\System.Configuration.ConfigurationManager.dll" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\runtimes\win\lib\net461\System.Configuration.ConfigurationManager.xml" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Configuration.ConfigurationManager.6.0.1\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\Icon.png" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net46\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\netstandard1.3\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\netstandard2.0\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\lib\netstandard2.0\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\LICENSE.TXT" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\net461\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\net461\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\net46\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\de\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\es\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\fr\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\it\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\ja\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\ko\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\ru\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\zh-hans\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard1.3\zh-hant\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard2.0\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\ref\netstandard2.0\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\net461\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\net461\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\net46\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\netstandard1.3\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\netstandard2.0\System.IO.FileSystem.AccessControl.dll" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\runtimes\win\lib\netstandard2.0\System.IO.FileSystem.AccessControl.xml" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.IO.FileSystem.AccessControl.5.0.0\version.txt" />
+    <Content Include="packages\System.Memory.4.5.4\lib\net461\System.Memory.dll" />
+    <Content Include="packages\System.Memory.4.5.4\lib\net461\System.Memory.xml" />
+    <Content Include="packages\System.Memory.4.5.4\lib\netstandard1.1\System.Memory.dll" />
+    <Content Include="packages\System.Memory.4.5.4\lib\netstandard1.1\System.Memory.xml" />
+    <Content Include="packages\System.Memory.4.5.4\lib\netstandard2.0\System.Memory.dll" />
+    <Content Include="packages\System.Memory.4.5.4\lib\netstandard2.0\System.Memory.xml" />
+    <Content Include="packages\System.Memory.4.5.4\LICENSE.TXT" />
+    <Content Include="packages\System.Memory.4.5.4\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Memory.4.5.4\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Memory.4.5.4\version.txt" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\Icon.png" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\win8\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\wpa81\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ref\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\runtimes\aot\lib\netcore50\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\runtimes\unix\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\runtimes\win\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\runtimes\win\lib\netcore50\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\runtimes\win\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\Icon.png" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\net6.0\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\net6.0\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\netstandard2.0\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\lib\netstandard2.0\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\LICENSE.TXT" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\net461\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\net461\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\net6.0\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\net6.0\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\netstandard2.0\System.Security.AccessControl.dll" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\runtimes\win\lib\netstandard2.0\System.Security.AccessControl.xml" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Security.AccessControl.6.0.1\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net46\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\netstandard1.3\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\LICENSE.TXT" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\net461\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\net461\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\net46\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\netstandard1.3\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\ref\netstandard2.0\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\net461\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\net461\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\net46\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\netstandard1.3\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.xml" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Security.Cryptography.ProtectedData.4.7.0\version.txt" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\Icon.png" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net5.0\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net5.0\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net6.0\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\net6.0\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\netcoreapp3.1\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\netcoreapp3.1\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\netstandard2.0\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\lib\netstandard2.0\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\LICENSE.TXT" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\runtimes\win\lib\net461\System.Security.Permissions.dll" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\runtimes\win\lib\net461\System.Security.Permissions.xml" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Security.Permissions.6.0.0\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\Icon.png" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\net46\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\netstandard1.3\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\netstandard2.0\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\lib\netstandard2.0\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\LICENSE.TXT" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\net461\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\net461\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\net46\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netcoreapp3.0\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netcoreapp3.0\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\de\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\es\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\fr\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\it\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\ja\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\ko\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\ru\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\zh-hans\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard1.3\zh-hant\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard2.0\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\ref\netstandard2.0\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\unix\lib\netcoreapp2.0\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\unix\lib\netcoreapp2.0\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\net461\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\net461\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\net46\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\netcoreapp2.0\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\netcoreapp2.0\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.xml" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\runtimes\win\lib\netstandard1.3\System.Security.Principal.Windows.dll" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Security.Principal.Windows.5.0.0\version.txt" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\de\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\es\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\fr\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\it\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\ja\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\ko\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\ru\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\System.Text.Encoding.dll" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\zh-hans\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netcore50\zh-hant\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\de\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\es\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\fr\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\it\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\ja\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\ko\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\ru\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\System.Text.Encoding.dll" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\zh-hans\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.0\zh-hant\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\de\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\es\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\fr\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\it\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\ja\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\ko\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\ru\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\System.Text.Encoding.dll" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\zh-hans\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ref\netstandard1.3\zh-hant\System.Text.Encoding.xml" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Text.Json.4.7.2\Icon.png" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.xml" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\netcoreapp3.0\System.Text.Json.dll" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\netcoreapp3.0\System.Text.Json.xml" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\netstandard2.0\System.Text.Json.dll" />
+    <Content Include="packages\System.Text.Json.4.7.2\lib\netstandard2.0\System.Text.Json.xml" />
+    <Content Include="packages\System.Text.Json.4.7.2\LICENSE.TXT" />
+    <Content Include="packages\System.Text.Json.4.7.2\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Text.Json.4.7.2\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Text.Json.4.7.2\version.txt" />
+    <Content Include="packages\System.Threading.Tasks.Extensions.4.6.0\Icon.png" />
+    <Content Include="packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.xml" />
+    <Content Include="packages\System.Threading.Tasks.Extensions.4.6.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="packages\System.Threading.Tasks.Extensions.4.6.0\lib\netstandard2.0\System.Threading.Tasks.Extensions.xml" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.xml" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.xml" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.xml" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.xml" />
+    <Content Include="packages\System.ValueTuple.4.5.0\LICENSE.TXT" />
+    <Content Include="packages\System.ValueTuple.4.5.0\ref\net461\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\ref\net47\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\ref\portable-net40+sl4+win8+wp8\System.ValueTuple.dll" />
+    <Content Include="packages\System.ValueTuple.4.5.0\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.ValueTuple.4.5.0\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.ValueTuple.4.5.0\version.txt" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\success.png" />
+    <None Include="Resources\show.png" />
+    <None Include="Resources\question.png" />
+    <None Include="Resources\photo_2024-11-26_10-04-22-removebg-preview1.png" />
+    <None Include="Resources\photo_2024-11-26_10-04-22-removebg-preview.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\HIlda_Season_1_%28Netflix%29_LE_auto_x4-transformed.jpeg" />
+    <None Include="Resources\HIlda Season 1 %28Netflix%29.jpg" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\circle-xmark-regular%281%29.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\LibrarySystem\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\..\LibrarySystem\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\LibrarySystem\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\LibrarySystem\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
+  </Target>
+</Project>
