@@ -129,7 +129,7 @@ namespace LibrarySystem.Classes
                 if (string.IsNullOrEmpty(textBox.Text))
                     throw new FormatException();
 
-                string passwordpattern = @"^(?=.*\d)[A-Za - z\d]{ 8,}$";
+                string passwordpattern = @"^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$";
 
                 if (string.IsNullOrEmpty(password))
                     throw new FormatException();

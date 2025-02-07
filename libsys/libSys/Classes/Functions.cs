@@ -51,7 +51,6 @@ namespace LibrarySystem
         {
             try
             {
-                SqlConnection con = new SqlConnection(GlobalConfig.ConnectionString);
                 User user = new User();
 
                 foreach (var (comboBoxes, textBoxes, errorLabels) in parameterSets)
@@ -79,24 +78,17 @@ namespace LibrarySystem
                     user.Age = comboBoxes[0].SelectedItem.ToString();
                     user.Gender = comboBoxes[1].SelectedItem.ToString();
                     user.Username = textBoxes[2].Text;
-                    user.Password = textBoxes[3].Text; 
+                    user.Password = textBoxes[3].Text;
                 }
 
-                using (SqlCommand cmd = new SqlCommand("InsertMemberInfo", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@FirstName", user.FirstName);
-                    cmd.Parameters.AddWithValue("@LastName", user.LastName);
-                    cmd.Parameters.AddWithValue("@Age", user.Age);
-                    cmd.Parameters.AddWithValue("@Gender", user.Gender);
-                    cmd.Parameters.AddWithValue("@Username", user.Username);
-                    cmd.Parameters.AddWithValue("@ContactMethod", user.ContactMethod);
-                    cmd.Parameters.AddWithValue("@Password", user.Password);
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                ExecuteQuery("InsertMemberInfo",
+                    new SqlParameter("@FirstName", user.FirstName),
+                    new SqlParameter("@LastName", user.LastName),
+                    new SqlParameter("@Age", user.Age),
+                    new SqlParameter("@Gender", user.Gender),
+                    new SqlParameter("@Username", user.Username),
+                    new SqlParameter("ContactMethod", user.ContactMethod),
+                    new SqlParameter("@Password", user.Password));
 
                 SideForms.CustomMessageBox.ShowOK("Registration complete!", "Account Created", Resources.success);
                 SwitchForms(Forms.FrontPage(), form);
@@ -120,18 +112,18 @@ namespace LibrarySystem
             else
                 checkBoxes[0].CheckState = CheckState.Unchecked;
 
-            if (password.Text.Any(char.IsNumber))
-                checkBoxes[2].CheckState = CheckState.Checked;
-            else
-                checkBoxes[2].CheckState = CheckState.Unchecked;
-
             if (password.Text.Length >= 8)
                 checkBoxes[1].CheckState = CheckState.Checked;
             else
                 checkBoxes[1].CheckState = CheckState.Unchecked;
+
+            if (password.Text.Any(char.IsNumber))
+                checkBoxes[2].CheckState = CheckState.Checked;
+            else
+                checkBoxes[2].CheckState = CheckState.Unchecked;
         }
 
-        public void ContactMethod(KryptonComboBox comboBox, KryptonComboBox cmbbxCountryCode, KryptonLabel lblContactMethod,
+        public static void ContactMethod(KryptonComboBox comboBox, KryptonComboBox cmbbxCountryCode, KryptonLabel lblContactMethod,
             KryptonTextBox txtbxContactMethod, KryptonTextBox txtbxCode)
         {
             string selectedItem = comboBox.SelectedItem.ToString();
@@ -158,11 +150,11 @@ namespace LibrarySystem
 
         #region Dashboard
 
-        public static void LoadBorrowedBooks(int memberId, KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
+        public static void LoadBorrowedBooks(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
             if (Classes.CurrentUser.Role == "Member")
-                LoadUser("GetUserBorrowedBooks", memberId, datagridBooks);
-            else LoadAll("LoadAllBorrowedBooks", datagridBooks, "BookID");
+                LoadData("LoadBorrowedBooks", datagridBooks, true, "MemberID", "BorrowID");
+            else LoadData("LoadBorrowedBooks", datagridBooks, false, "MemberID", "BorrowID");
             lblFormChange.Text = "Borrowed Books";
         }
 
@@ -171,9 +163,9 @@ namespace LibrarySystem
             try
             {
                 if (Classes.CurrentUser.Role == "Member")
-                    LoadUser("LoadUserOverdueBooks", Classes.CurrentUser.UserID, datagridBooks);
+                    LoadData("LoadOverdueBooks", datagridBooks, true, "MemberID", "BorrowID");
                 else
-                    LoadAll("LoadAllOverdueBooks", datagridBooks, "BookID");
+                    LoadData("LoadAllOverdueBooks", datagridBooks, false, "MemberID", "BorrowID");
 
                 lblFormChange.Text = "Overdue Books";
                 datagridBooks.Columns["BorrowID"].Visible = false;
@@ -181,26 +173,6 @@ namespace LibrarySystem
             catch (Exception ex)
             {
                 SideForms.CustomMessageBox.ShowOK("Error while loading overdue books:\n" + ex.Message, "Error", Resources.error);
-            }
-        }
-
-        public static void UpdatePenaltyFees()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("UpdatePenaltyFees", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                SideForms.CustomMessageBox.ShowOK("Error updating penalty fees:\n" + ex.Message, "Error", Resources.error);
             }
         }
 
@@ -214,34 +186,13 @@ namespace LibrarySystem
 
                 conn.Open();
                 int rowsAffected = (int)cmd.ExecuteScalar();
-                
+
                 if (rowsAffected > 0)
                 {
                     SideForms.CustomMessageBox.ShowOK($"You have {rowsAffected} overdue books\nSettle it first before you can borrow againg",
                             "Overdue books", Resources.information);
                     form.Controls.Remove(btnBorrow);
                 }
-            }
-        }
-
-        public static void CheckOverdueBooks()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("CheckOverdueBooks", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    
-                    conn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                SideForms.CustomMessageBox.ShowOK("Error while checking overdue books:\n" + ex.Message, "Error", Resources.error);
             }
         }
 
@@ -286,27 +237,22 @@ namespace LibrarySystem
 
             if (cmbbxgenre.Items.Contains(cmbbxgenre.SelectedItem.ToString()))
             {
-                if (cmbbxgenre.SelectedItem.ToString() == "All Books")
-                    dtBooks.DataSource = LoadAllAvailableBooks();
-                else
+                using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
                 {
-                    using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand("SortBooksByGenre", conn);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Genre", genre);
-                        cmd.Parameters.AddWithValue("@IsBookmarks", isBookmarks);
+                    SqlCommand cmd = new SqlCommand("SortBooksByGenre", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Genre", genre);
+                    cmd.Parameters.AddWithValue("@IsBookmarks", isBookmarks);
 
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        dtBooks.DataSource = dt;
-                    }
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dtBooks.DataSource = dt;
                 }
             }
         }
 
-        public static void ReturnBook(KryptonDataGridView datagridBooks, int memberID)
+        public static void ReturnBook(KryptonDataGridView datagridBooks)
         {
             if (datagridBooks.SelectedRows.Count == 1)
             {
@@ -318,11 +264,12 @@ namespace LibrarySystem
                     using (SqlCommand cmd = new SqlCommand("ReturnBook", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-
                         cmd.Parameters.AddWithValue("@BookID", bookID);
-                        cmd.Parameters.AddWithValue("@MemberID", memberID);
+                        cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
+
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
+
                         if (rowsAffected > 0)
                             SideForms.CustomMessageBox.ShowOK("Book returned successfully", "Successful", Resources.success);
                         else
@@ -340,43 +287,25 @@ namespace LibrarySystem
             lblTotalCount.Text = "Total: " + total;
         }
 
-        public static void LoadTransactions(KryptonDataGridView datagridBooks, int memberID, KryptonLabel lblFormChange)
+        public static void LoadTransactions(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
             if (Classes.CurrentUser.Role == "Member")
-                LoadUser("LoadUserTransactions", memberID, datagridBooks);
-            else LoadAll("LoadAllTransactions", datagridBooks, "BookID");
+                LoadData("LoadTransactions", datagridBooks, true, "BookID");
+            else LoadData("LoadTransactions", datagridBooks, false, "BookID");
             lblFormChange.Text = "Transactions";
         }
 
-        public static void LoadBookmarks(KryptonDataGridView datagridBooks, int memberID, KryptonLabel lblFormChange)
-        {
-            LoadUser("LoadUserBookmarks", memberID, datagridBooks);
-        }
-
-        public static void AddToBookmarks(KryptonDataGridView datagridBooks, int memberID)
+        public static void AddToBookmarks(KryptonDataGridView datagridBooks)
         {
             if (datagridBooks.SelectedRows.Count > 0)
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-                    {
-                        conn.Open();
+                    DataGridViewRow selectedRow = datagridBooks.SelectedRows[0];
+                    int bookID = int.Parse(selectedRow.Cells["BookID"].Value.ToString());
 
-                        using (SqlCommand cmd = new SqlCommand("InsertBookmark", conn))
-                        {
-                            DataGridViewRow selectedRow = datagridBooks.SelectedRows[0];
-                            int bookID = int.Parse(selectedRow.Cells["BookID"].Value.ToString());
-
-                            cmd.CommandType = CommandType.StoredProcedure;
-
-                            cmd.Parameters.AddWithValue("@MemberID", memberID);
-                            cmd.Parameters.AddWithValue("@BookID", bookID);
-
-                            cmd.ExecuteNonQuery();
-                            SideForms.CustomMessageBox.ShowOK("Successfully bookmarked!", "Success", Resources.success);
-                        }
-                    }
+                    ExecuteQuery("InsertBookmark", new SqlParameter("@MemberID", Classes.CurrentUser.UserID), new SqlParameter("@BookID", bookID));
+                    SideForms.CustomMessageBox.ShowOK("Successfully bookmarked!", "Success", Resources.success);
                 }
                 catch (SqlException ex)
                 {
@@ -390,7 +319,7 @@ namespace LibrarySystem
                 SideForms.CustomMessageBox.ShowOK("Please choose exactly one book to bookmark.", "Selection", Resources.information);
         }
 
-        public static void RemoveFromBookmarks(KryptonDataGridView datagridBooks, int memberID)
+        public static void RemoveFromBookmarks(KryptonDataGridView datagridBooks)
         {
             if (datagridBooks.SelectedRows.Count > 0)
             {
@@ -405,7 +334,7 @@ namespace LibrarySystem
 
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@MemberID", memberID);
+                        cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
                         cmd.Parameters.AddWithValue("@BookmarkID", bookmarkID);
 
                         cmd.ExecuteNonQuery();
@@ -430,7 +359,7 @@ namespace LibrarySystem
             int memberID = int.Parse(selectedRow.Cells["MemberID"].Value.ToString());
             int borrowID = int.Parse(selectedRow.Cells["BorrowID"].Value.ToString());
 
-            ExecuteQuery("ClearPenaltyFees", (new string[] { "@MemberID", "@BorrowID" }, new object[] { memberID, borrowID }));
+            ExecuteQuery("ClearPenaltyFees", new SqlParameter("@MemberID", memberID), new SqlParameter("@BorrowID", borrowID));
 
             SideForms.CustomMessageBox.ShowOK("Penalty fees cleared.", "Payments Settled", Resources.success);
         }
@@ -440,7 +369,7 @@ namespace LibrarySystem
             DataGridViewRow selectedRow = dataGridMembers.SelectedRows[0];
             int memberID = int.Parse(selectedRow.Cells["MemberID"].Value.ToString());
 
-            ExecuteQuery("DeleteMember", (new string[] { "@MemberID" }, new object[] { memberID }));
+            ExecuteQuery("DeleteMember", new SqlParameter("@MemberID", memberID));
 
             SideForms.CustomMessageBox.ShowOK("Member successfully removed.", "Member Removed", Resources.success);
             Functions.LoadAll("LoadMemberInfo", dataGridMembers, "MemberID");
@@ -510,7 +439,7 @@ namespace LibrarySystem
             DataGridViewRow selectedRow = dataGridPendingRequests.SelectedRows[0];
             int memberID = int.Parse(selectedRow.Cells["MemberID"].Value.ToString());
 
-            ExecuteQuery("DeclineRequest", (new string[] { "@MemberID" }, new object[] { memberID }));
+            ExecuteQuery("DeclineRequest", new SqlParameter("@MemberID", memberID));
 
             SideForms.CustomMessageBox.ShowOK("Request declined.", "Borrow Request Declined", Resources.question);
             LoadPendingRequests(dataGridPendingRequests);
@@ -525,8 +454,13 @@ namespace LibrarySystem
             DateTime borrowdate = DateTime.Now;
             DateTime duedate = dueDate.Value;
 
-            ExecuteQuery("InsertBorrowedBook", (new string[] { "@MemberID", "@BookID", "@BorrowDate", "@DueDate", "@Copies" },
-                    new object[] { memberID, bookID, borrowdate, duedate, numberOfCopies }));
+            ExecuteQuery("InsertBorrowedBook",
+                new SqlParameter("MemberID", memberID),
+                new SqlParameter("@BookID", bookID),
+                new SqlParameter("@BorrowDate", borrowdate),
+                new SqlParameter("@DueDate", duedate),
+                new SqlParameter("@Copies", numberOfCopies)
+                );
 
             SideForms.CustomMessageBox.ShowOK("Request approved!", "Request Approval", Resources.success);
             LoadPendingRequests(dataGridPendingRequests);
@@ -535,6 +469,14 @@ namespace LibrarySystem
         #endregion
 
         #region ManageBooks
+
+        public static void RefreshTextBoxes(Dictionary<Control, string> txtBxInitialValues)
+        {
+            foreach (var entry in txtBxInitialValues)
+            {
+                entry.Key.Text = entry.Value;
+            }
+        }
 
         public static void AddGenre(KryptonListBox genreListBx)
         {
@@ -602,7 +544,7 @@ namespace LibrarySystem
                     return;
             }
         }
-         
+
         public static void RemoveImage(PictureBox bookCoverImage)
         {
             bookCoverImage.Image = null;
@@ -615,22 +557,24 @@ namespace LibrarySystem
             {
                 SqlCommand cmd = new SqlCommand("AddNewBook", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BookCover", imageBytes);
-                cmd.Parameters.AddWithValue("@Title", txtbxTitle.Text);
-                cmd.Parameters.AddWithValue("@Author", txtbxAuthor.Text);
-                cmd.Parameters.AddWithValue("@YearOfPublication", txtbxPublishedYear.Text);
-                cmd.Parameters.AddWithValue("@Description", txtbxDesc.Text);
-                cmd.Parameters.AddWithValue("@Copies", txtbxCopies.Text);
+
+                cmd.Parameters.AddRange(new SqlParameter[]
+                {
+                    new SqlParameter("@BookCover", imageBytes),
+                    new SqlParameter("@Title", txtbxTitle.Text),
+                    new SqlParameter("@Author", txtbxAuthor.Text),
+                    new SqlParameter("@YearOfPublication", txtbxPublishedYear.Text),
+                    new SqlParameter("@Description", txtbxDesc.Text),
+                    new SqlParameter("@Copies", txtbxCopies.Text)
+                });
 
                 conn.Open();
-                cmd.ExecuteNonQuery();
                 object bookID = cmd.ExecuteScalar();
 
                 if (bookID != null)
                     AddToBookGenre(Convert.ToInt32(bookID));
             }
             SideForms.CustomMessageBox.ShowOK("Book added successfully!", "New Book Added", Resources.success);
-            Functions.LoadAllAvailableBooks();
         }
 
         public static void DeleteBook(KryptonDataGridView datagridBooks)
@@ -651,7 +595,6 @@ namespace LibrarySystem
                     SideForms.CustomMessageBox.ShowOK("Book successfully deleted", "Book Deleted", Resources.success);
                 conn.Close();
             }
-            LoadAllAvailableBooks();
         }
 
 
@@ -698,7 +641,7 @@ namespace LibrarySystem
                 else
                     SideForms.CustomMessageBox.ShowOK("Please select exactly one row", "Selection", Resources.information);
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
 
             }
@@ -767,20 +710,26 @@ namespace LibrarySystem
 
         #region GeneralFunctions
 
-        public static void PlaceholderText(Control textBox, string placeholderText)
+        public static void PlaceholderText(KryptonTextBox textBox, string placeholderText)
         {
             if (textBox.Text == placeholderText)
+            {
                 textBox.Text = "";
+                textBox.StateCommon.Content.Font = new Font(textBox.StateCommon.Content.Font.FontFamily, textBox.StateCommon.Content.Font.Size, FontStyle.Regular);
+            }
             else if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
                 textBox.Text = placeholderText;
+                textBox.StateCommon.Content.Font = new Font(textBox.StateCommon.Content.Font.FontFamily, textBox.StateCommon.Content.Font.Size, FontStyle.Italic);
+            }
         }
 
         public static void ControlAccess(KryptonForm form, params KryptonButton[] buttons)
         {
             if (Classes.CurrentUser.Role == "Member")
-                HideControls(form, buttons[0], buttons[1], buttons[7]);
+                HideControls(form, buttons[0], buttons[6]);
             else
-                HideControls(form, buttons[2], buttons[3], buttons[4], buttons[5], buttons[6]);
+                HideControls(form, buttons[1], buttons[2], buttons[3], buttons[4], buttons[5]);
         }
 
         public static string CurrentUser(KryptonComboBox cmbbxcurrentUser)
@@ -840,24 +789,25 @@ namespace LibrarySystem
             }
         }
 
-        public static void ExecuteQuery(string query, params (string[] parameterNames, object[] values)[] parameterSets)
+        public static void ExecuteQuery(string query, params SqlParameter[] parameterSets)
         {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            try
             {
-                conn.Open();
-
-                foreach (var (parameterNames, values) in parameterSets)
+                using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    for (int i = 0; i < parameterNames.Length; i++)
-                    {
-                        cmd.Parameters.AddWithValue(parameterNames[i], values[i]);
-                    }
+                    if (parameterSets != null)
+                        cmd.Parameters.AddRange(parameterSets);
 
+                    conn.Open();
                     cmd.ExecuteNonQuery();
                 }
+            }
+            catch (Exception ex)
+            {
+                SideForms.CustomMessageBox.ShowOK(ex.Message, "Something went wrong", Resources.error);
             }
         }
 
@@ -910,13 +860,34 @@ namespace LibrarySystem
             }
         }
 
-        public static void LoadUser(string query, int memberId, KryptonDataGridView dataTable)
+        public static void LoadData(string query, KryptonDataGridView dataTable, bool isMember, params string[] columnID)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@MemberID", memberId);
+
+                if (isMember)
+                    cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID); 
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataTable.DataSource = dt;
+
+                foreach(string id in columnID)
+                    dataTable.Columns[id].Visible = false;
+            }
+        }
+
+        public static void LoadUser(string query, KryptonDataGridView dataTable)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -939,7 +910,7 @@ namespace LibrarySystem
                 dataTable.Columns[columnID].Visible = false;
             }
         }
-        
+
         public static void ClearTextBoxes(Control container, params KryptonTextBox[] textBoxes)
         {
             foreach (KryptonTextBox textBox in textBoxes)
@@ -967,6 +938,17 @@ namespace LibrarySystem
         {
             foreach (Control control in controls)
                 control.Visible = true;
+        }
+
+        public static void EnableDisableControls(bool isEnabled, params Control[] controls)
+        {
+            foreach (Control control in controls)
+            {
+                if (isEnabled)
+                    control.Enabled = false;
+                else
+                    control.Enabled = true;
+            }
         }
 
         public static void SwitchForms(KryptonForm showForm, KryptonForm hideForm)

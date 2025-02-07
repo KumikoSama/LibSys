@@ -2,6 +2,7 @@
 using LibrarySystem.Classes;
 using libSys.Properties;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -11,16 +12,22 @@ namespace LibrarySystem
 {
     public partial class ManageBooks : KryptonForm
     {
+        readonly Dictionary<Control, string> txtBxInitialValues = new Dictionary<Control, string>();
+
         public ManageBooks()
         {
             InitializeComponent();
-            kryptonGroupBox1.CaptionVisible = false;
+            Worker.RunWorkerAsync();
+
+            foreach (Control control in kryptonGroupBox1.Panel.Controls)
+            {
+                if (control is KryptonTextBox textBox)
+                    txtBxInitialValues[textBox] = textBox.Text;
+            }
         }
 
         private void ManageBooks_Load(object sender, EventArgs e)
         {
-            Worker.RunWorkerAsync();
-            datagridBooks.DataSource = Functions.LoadAllAvailableBooks();
             if (bookCoverImage.Image != null)
                 lnklblRemoveImage.Visible = true;
             else lnklblRemoveImage.Visible = false;
@@ -41,6 +48,10 @@ namespace LibrarySystem
             Functions.HideControls(this, btnAddNewBook, btnSaveChanges);
             Functions.ShowControls(this, btnEditBook, btnSaveNewBook);
             Functions.EmptyTextboxes(bookCoverImage, genreListBox, txtbxTitle, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxYear);
+            Functions.RefreshTextBoxes(txtBxInitialValues);
+            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
+                lnklblUploadImage, genreListBox);
+
             datagridBooks.Enabled = false;
         }
 
@@ -48,6 +59,9 @@ namespace LibrarySystem
         {
             Functions.HideControls(this, btnEditBook, btnSaveNewBook);
             Functions.ShowControls(this, btnAddNewBook, btnSaveChanges);
+            Functions.EnableDisableControls(true, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
+                lnklblUploadImage, genreListBox, btnSaveChanges);
+
             datagridBooks.Enabled = true;
         }
 
@@ -60,6 +74,7 @@ namespace LibrarySystem
         {
             SideForms.CustomMessageBox.ShowYesNo("Are you sure you want to delete this book?", "Confirm Book Deletion",
                 Resources.question, () => Functions.DeleteBook(datagridBooks));
+            Worker.RunWorkerAsync();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -70,7 +85,9 @@ namespace LibrarySystem
         private void datagridBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Functions.PopulateTextBoxes(txtbxTitle, txtbxAuthor, txtbxYear, txtbxCopies, txtbxDescription, bookCoverImage, datagridBooks, genreListBox);
-            
+            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
+                lnklblUploadImage, genreListBox, btnSaveChanges);
+
             txtbxDescription.SelectAll();
             txtbxDescription.SelectionAlignment = HorizontalAlignment.Center;
 
@@ -155,11 +172,11 @@ namespace LibrarySystem
             Functions.PlaceholderText(txtbxCopies, "Copies");
         }
 
-        private void txtbxDescription_PlaceholderText(object sender, EventArgs e)
-        {
-            Functions.PlaceholderText(txtbxDescription, "Description");
-        }
-
         #endregion
+
+        private void picBxRefresh_Click(object sender, EventArgs e)
+        {
+            Worker.RunWorkerAsync();
+        }
     }
 }

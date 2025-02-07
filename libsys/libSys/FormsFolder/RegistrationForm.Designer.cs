@@ -59,7 +59,6 @@
             this.errorUsername = new System.Windows.Forms.Label();
             this.errorTxtBxContactMethod = new System.Windows.Forms.Label();
             this.txtbxCode = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.btnShowPassword = new System.Windows.Forms.PictureBox();
             this.kryptonLabel10 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.cmbbxCountryCode = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.btnBack = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -71,6 +70,7 @@
             this.txtbxUsername = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtbxContactMethod = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnHidePassword = new System.Windows.Forms.PictureBox();
+            this.btnShowPassword = new System.Windows.Forms.PictureBox();
             this.btnGoBack = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.exitbtn)).BeginInit();
@@ -83,9 +83,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondPanel)).BeginInit();
             this.secondPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxContactMethod)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxCountryCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHidePassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGoBack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,7 +157,7 @@
             this.firstPanel.Controls.Add(this.txtbxLname);
             this.firstPanel.Controls.Add(this.txtbxFname);
             this.firstPanel.Controls.Add(this.pictureBox3);
-            this.firstPanel.Location = new System.Drawing.Point(567, 1);
+            this.firstPanel.Location = new System.Drawing.Point(556, 1);
             this.firstPanel.Name = "firstPanel";
             this.firstPanel.Palette = this.kryptonPalette1;
             this.firstPanel.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -174,7 +174,7 @@
             "Under 18",
             "18-24",
             "25+"});
-            this.cmbbxAge.Location = new System.Drawing.Point(150, 328);
+            this.cmbbxAge.Location = new System.Drawing.Point(136, 328);
             this.cmbbxAge.Name = "cmbbxAge";
             this.cmbbxAge.Palette = this.kryptonPalette2;
             this.cmbbxAge.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -297,7 +297,7 @@
             this.errorCmbBxGender.BackColor = System.Drawing.Color.Transparent;
             this.errorCmbBxGender.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorCmbBxGender.ForeColor = System.Drawing.Color.Tomato;
-            this.errorCmbBxGender.Location = new System.Drawing.Point(297, 417);
+            this.errorCmbBxGender.Location = new System.Drawing.Point(283, 417);
             this.errorCmbBxGender.Name = "errorCmbBxGender";
             this.errorCmbBxGender.Size = new System.Drawing.Size(73, 14);
             this.errorCmbBxGender.TabIndex = 35;
@@ -310,7 +310,7 @@
             this.errorCmbBxAge.BackColor = System.Drawing.Color.Transparent;
             this.errorCmbBxAge.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorCmbBxAge.ForeColor = System.Drawing.Color.Tomato;
-            this.errorCmbBxAge.Location = new System.Drawing.Point(313, 357);
+            this.errorCmbBxAge.Location = new System.Drawing.Point(299, 357);
             this.errorCmbBxAge.Name = "errorCmbBxAge";
             this.errorCmbBxAge.Size = new System.Drawing.Size(57, 14);
             this.errorCmbBxAge.TabIndex = 34;
@@ -323,7 +323,7 @@
             this.errorLname.BackColor = System.Drawing.Color.Transparent;
             this.errorLname.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLname.ForeColor = System.Drawing.Color.Tomato;
-            this.errorLname.Location = new System.Drawing.Point(249, 299);
+            this.errorLname.Location = new System.Drawing.Point(235, 299);
             this.errorLname.Name = "errorLname";
             this.errorLname.Size = new System.Drawing.Size(121, 14);
             this.errorLname.TabIndex = 33;
@@ -336,7 +336,7 @@
             this.errorFname.BackColor = System.Drawing.Color.Transparent;
             this.errorFname.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorFname.ForeColor = System.Drawing.Color.Tomato;
-            this.errorFname.Location = new System.Drawing.Point(249, 238);
+            this.errorFname.Location = new System.Drawing.Point(235, 238);
             this.errorFname.Name = "errorFname";
             this.errorFname.Size = new System.Drawing.Size(121, 14);
             this.errorFname.TabIndex = 32;
@@ -353,7 +353,7 @@
             "Female",
             "Others",
             "Rather not say"});
-            this.cmbbxGender.Location = new System.Drawing.Point(150, 391);
+            this.cmbbxGender.Location = new System.Drawing.Point(136, 391);
             this.cmbbxGender.Name = "cmbbxGender";
             this.cmbbxGender.Palette = this.kryptonPalette2;
             this.cmbbxGender.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -368,7 +368,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(217, 451);
+            this.btnNext.Location = new System.Drawing.Point(203, 451);
             this.btnNext.Name = "btnNext";
             this.btnNext.Palette = this.kryptonPalette2;
             this.btnNext.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -380,7 +380,7 @@
             // lblGender
             // 
             this.lblGender.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblGender.Location = new System.Drawing.Point(150, 371);
+            this.lblGender.Location = new System.Drawing.Point(136, 371);
             this.lblGender.Name = "lblGender";
             this.lblGender.Palette = this.kryptonPalette1;
             this.lblGender.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -391,7 +391,7 @@
             // lblAge
             // 
             this.lblAge.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblAge.Location = new System.Drawing.Point(150, 310);
+            this.lblAge.Location = new System.Drawing.Point(136, 310);
             this.lblAge.Name = "lblAge";
             this.lblAge.Palette = this.kryptonPalette1;
             this.lblAge.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -402,7 +402,7 @@
             // lblLname
             // 
             this.lblLname.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblLname.Location = new System.Drawing.Point(150, 249);
+            this.lblLname.Location = new System.Drawing.Point(136, 249);
             this.lblLname.Name = "lblLname";
             this.lblLname.Palette = this.kryptonPalette1;
             this.lblLname.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -413,7 +413,7 @@
             // lblFname
             // 
             this.lblFname.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblFname.Location = new System.Drawing.Point(149, 188);
+            this.lblFname.Location = new System.Drawing.Point(135, 188);
             this.lblFname.Name = "lblFname";
             this.lblFname.Palette = this.kryptonPalette1;
             this.lblFname.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -423,7 +423,7 @@
             // 
             // lblPageName
             // 
-            this.lblPageName.Location = new System.Drawing.Point(73, 99);
+            this.lblPageName.Location = new System.Drawing.Point(72, 99);
             this.lblPageName.Name = "lblPageName";
             this.lblPageName.Palette = this.kryptonPalette1;
             this.lblPageName.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -440,7 +440,7 @@
             // txtbxLname
             // 
             this.txtbxLname.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxLname.Location = new System.Drawing.Point(150, 269);
+            this.txtbxLname.Location = new System.Drawing.Point(136, 269);
             this.txtbxLname.Name = "txtbxLname";
             this.txtbxLname.Palette = this.kryptonPalette2;
             this.txtbxLname.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -452,7 +452,7 @@
             // txtbxFname
             // 
             this.txtbxFname.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxFname.Location = new System.Drawing.Point(150, 208);
+            this.txtbxFname.Location = new System.Drawing.Point(136, 208);
             this.txtbxFname.Name = "txtbxFname";
             this.txtbxFname.Palette = this.kryptonPalette2;
             this.txtbxFname.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -521,7 +521,7 @@
             this.cmbbxContactMethod.Items.AddRange(new object[] {
             "Email",
             "Phone Number"});
-            this.cmbbxContactMethod.Location = new System.Drawing.Point(135, 90);
+            this.cmbbxContactMethod.Location = new System.Drawing.Point(135, 83);
             this.cmbbxContactMethod.Name = "cmbbxContactMethod";
             this.cmbbxContactMethod.Palette = this.kryptonPalette2;
             this.cmbbxContactMethod.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -537,7 +537,7 @@
             // 
             // chckBxThirdRequirement
             // 
-            this.chckBxThirdRequirement.Location = new System.Drawing.Point(141, 392);
+            this.chckBxThirdRequirement.Location = new System.Drawing.Point(169, 389);
             this.chckBxThirdRequirement.Name = "chckBxThirdRequirement";
             this.chckBxThirdRequirement.Palette = this.kryptonPalette2;
             this.chckBxThirdRequirement.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -545,10 +545,11 @@
             this.chckBxThirdRequirement.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.chckBxThirdRequirement.TabIndex = 34;
             this.chckBxThirdRequirement.Values.Text = "Must include one number";
+            this.chckBxThirdRequirement.Click += new System.EventHandler(this.checkBoxCheck_Click);
             // 
             // chckBxSecondRequirement
             // 
-            this.chckBxSecondRequirement.Location = new System.Drawing.Point(141, 362);
+            this.chckBxSecondRequirement.Location = new System.Drawing.Point(169, 359);
             this.chckBxSecondRequirement.Name = "chckBxSecondRequirement";
             this.chckBxSecondRequirement.Palette = this.kryptonPalette2;
             this.chckBxSecondRequirement.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -556,17 +557,20 @@
             this.chckBxSecondRequirement.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.chckBxSecondRequirement.TabIndex = 33;
             this.chckBxSecondRequirement.Values.Text = "At least 8 characters";
+            this.chckBxSecondRequirement.Click += new System.EventHandler(this.checkBoxCheck_Click);
             // 
             // chckBxFirstRequirement
             // 
-            this.chckBxFirstRequirement.Location = new System.Drawing.Point(141, 332);
+            this.chckBxFirstRequirement.Location = new System.Drawing.Point(169, 329);
             this.chckBxFirstRequirement.Name = "chckBxFirstRequirement";
             this.chckBxFirstRequirement.Palette = this.kryptonPalette2;
             this.chckBxFirstRequirement.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.chckBxFirstRequirement.Size = new System.Drawing.Size(193, 19);
+            this.chckBxFirstRequirement.StateCommon.Image.Effect = ComponentFactory.Krypton.Toolkit.PaletteImageEffect.Normal;
             this.chckBxFirstRequirement.StateCommon.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.chckBxFirstRequirement.TabIndex = 32;
             this.chckBxFirstRequirement.Values.Text = "Uppercase and lowercase letters";
+            this.chckBxFirstRequirement.Click += new System.EventHandler(this.checkBoxCheck_Click);
             // 
             // errorPassword
             // 
@@ -574,7 +578,7 @@
             this.errorPassword.BackColor = System.Drawing.Color.Transparent;
             this.errorPassword.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorPassword.ForeColor = System.Drawing.Color.Tomato;
-            this.errorPassword.Location = new System.Drawing.Point(262, 304);
+            this.errorPassword.Location = new System.Drawing.Point(262, 297);
             this.errorPassword.Name = "errorPassword";
             this.errorPassword.Size = new System.Drawing.Size(122, 14);
             this.errorPassword.TabIndex = 31;
@@ -587,7 +591,7 @@
             this.errorUsername.BackColor = System.Drawing.Color.Transparent;
             this.errorUsername.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorUsername.ForeColor = System.Drawing.Color.Tomato;
-            this.errorUsername.Location = new System.Drawing.Point(269, 244);
+            this.errorUsername.Location = new System.Drawing.Point(269, 237);
             this.errorUsername.Name = "errorUsername";
             this.errorUsername.Size = new System.Drawing.Size(114, 14);
             this.errorUsername.TabIndex = 30;
@@ -600,7 +604,7 @@
             this.errorTxtBxContactMethod.BackColor = System.Drawing.Color.Transparent;
             this.errorTxtBxContactMethod.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorTxtBxContactMethod.ForeColor = System.Drawing.Color.Tomato;
-            this.errorTxtBxContactMethod.Location = new System.Drawing.Point(243, 183);
+            this.errorTxtBxContactMethod.Location = new System.Drawing.Point(243, 176);
             this.errorTxtBxContactMethod.Name = "errorTxtBxContactMethod";
             this.errorTxtBxContactMethod.Size = new System.Drawing.Size(141, 14);
             this.errorTxtBxContactMethod.TabIndex = 29;
@@ -610,7 +614,7 @@
             // txtbxCode
             // 
             this.txtbxCode.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxCode.Location = new System.Drawing.Point(141, 155);
+            this.txtbxCode.Location = new System.Drawing.Point(141, 148);
             this.txtbxCode.Name = "txtbxCode";
             this.txtbxCode.Palette = this.kryptonPalette2;
             this.txtbxCode.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -627,23 +631,10 @@
             this.txtbxCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtbxCode.Visible = false;
             // 
-            // btnShowPassword
-            // 
-            this.btnShowPassword.BackColor = System.Drawing.Color.Transparent;
-            this.btnShowPassword.BackgroundImage = global::libSys.Properties.Resources.Show;
-            this.btnShowPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnShowPassword.Location = new System.Drawing.Point(356, 276);
-            this.btnShowPassword.Name = "btnShowPassword";
-            this.btnShowPassword.Size = new System.Drawing.Size(25, 24);
-            this.btnShowPassword.TabIndex = 24;
-            this.btnShowPassword.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnShowPassword, "Show Password");
-            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
-            // 
             // kryptonLabel10
             // 
             this.kryptonLabel10.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.kryptonLabel10.Location = new System.Drawing.Point(135, 70);
+            this.kryptonLabel10.Location = new System.Drawing.Point(135, 63);
             this.kryptonLabel10.Name = "kryptonLabel10";
             this.kryptonLabel10.Palette = this.kryptonPalette1;
             this.kryptonLabel10.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -658,7 +649,7 @@
             this.cmbbxCountryCode.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
             this.cmbbxCountryCode.Items.AddRange(new object[] {
             "+63"});
-            this.cmbbxCountryCode.Location = new System.Drawing.Point(135, 152);
+            this.cmbbxCountryCode.Location = new System.Drawing.Point(135, 145);
             this.cmbbxCountryCode.Name = "cmbbxCountryCode";
             this.cmbbxCountryCode.Palette = this.kryptonPalette2;
             this.cmbbxCountryCode.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -698,7 +689,7 @@
             // lblPass
             // 
             this.lblPass.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblPass.Location = new System.Drawing.Point(135, 254);
+            this.lblPass.Location = new System.Drawing.Point(135, 247);
             this.lblPass.Name = "lblPass";
             this.lblPass.Palette = this.kryptonPalette1;
             this.lblPass.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -709,7 +700,7 @@
             // lblUsername
             // 
             this.lblUsername.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblUsername.Location = new System.Drawing.Point(135, 192);
+            this.lblUsername.Location = new System.Drawing.Point(135, 185);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Palette = this.kryptonPalette1;
             this.lblUsername.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -720,7 +711,7 @@
             // lblEmailorPhone
             // 
             this.lblEmailorPhone.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblEmailorPhone.Location = new System.Drawing.Point(134, 131);
+            this.lblEmailorPhone.Location = new System.Drawing.Point(134, 124);
             this.lblEmailorPhone.Name = "lblEmailorPhone";
             this.lblEmailorPhone.Palette = this.kryptonPalette1;
             this.lblEmailorPhone.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -731,7 +722,7 @@
             // txtbxPassword
             // 
             this.txtbxPassword.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxPassword.Location = new System.Drawing.Point(137, 274);
+            this.txtbxPassword.Location = new System.Drawing.Point(137, 267);
             this.txtbxPassword.Name = "txtbxPassword";
             this.txtbxPassword.Palette = this.kryptonPalette2;
             this.txtbxPassword.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -744,7 +735,7 @@
             // txtbxUsername
             // 
             this.txtbxUsername.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxUsername.Location = new System.Drawing.Point(135, 213);
+            this.txtbxUsername.Location = new System.Drawing.Point(135, 206);
             this.txtbxUsername.Name = "txtbxUsername";
             this.txtbxUsername.Palette = this.kryptonPalette2;
             this.txtbxUsername.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -755,7 +746,7 @@
             // txtbxContactMethod
             // 
             this.txtbxContactMethod.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxContactMethod.Location = new System.Drawing.Point(137, 151);
+            this.txtbxContactMethod.Location = new System.Drawing.Point(137, 144);
             this.txtbxContactMethod.Name = "txtbxContactMethod";
             this.txtbxContactMethod.Palette = this.kryptonPalette2;
             this.txtbxContactMethod.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -769,7 +760,7 @@
             this.btnHidePassword.BackColor = System.Drawing.Color.Transparent;
             this.btnHidePassword.BackgroundImage = global::libSys.Properties.Resources.hide;
             this.btnHidePassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnHidePassword.Location = new System.Drawing.Point(356, 276);
+            this.btnHidePassword.Location = new System.Drawing.Point(356, 269);
             this.btnHidePassword.Name = "btnHidePassword";
             this.btnHidePassword.Size = new System.Drawing.Size(25, 26);
             this.btnHidePassword.TabIndex = 25;
@@ -777,6 +768,19 @@
             this.toolTip1.SetToolTip(this.btnHidePassword, "Hide Password");
             this.btnHidePassword.Visible = false;
             this.btnHidePassword.Click += new System.EventHandler(this.btnHidePassword_Click);
+            // 
+            // btnShowPassword
+            // 
+            this.btnShowPassword.BackColor = System.Drawing.Color.Transparent;
+            this.btnShowPassword.BackgroundImage = global::libSys.Properties.Resources.Show;
+            this.btnShowPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnShowPassword.Location = new System.Drawing.Point(356, 269);
+            this.btnShowPassword.Name = "btnShowPassword";
+            this.btnShowPassword.Size = new System.Drawing.Size(25, 24);
+            this.btnShowPassword.TabIndex = 24;
+            this.btnShowPassword.TabStop = false;
+            this.toolTip1.SetToolTip(this.btnShowPassword, "Show Password");
+            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
             // 
             // btnGoBack
             // 
@@ -825,9 +829,9 @@
             this.secondPanel.ResumeLayout(false);
             this.secondPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxContactMethod)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxCountryCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnHidePassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGoBack)).EndInit();
             this.ResumeLayout(false);
 
@@ -871,11 +875,12 @@
         private System.Windows.Forms.Label errorPassword;
         private System.Windows.Forms.Label errorUsername;
         private System.Windows.Forms.Label errorTxtBxContactMethod;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxFirstRequirement;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxThirdRequirement;
-        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxSecondRequirement;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbbxAge;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbbxContactMethod;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxThirdRequirement;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxSecondRequirement;
+        private ComponentFactory.Krypton.Toolkit.KryptonCheckBox chckBxFirstRequirement;
     }
 }

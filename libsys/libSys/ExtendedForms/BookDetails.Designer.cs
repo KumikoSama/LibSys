@@ -236,6 +236,7 @@
             this.Name = "BookDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BookDetails";
+            this.Deactivate += new System.EventHandler(this.BookDetails_Deactivate);
             this.Load += new System.EventHandler(this.BookDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picbxBookCover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();

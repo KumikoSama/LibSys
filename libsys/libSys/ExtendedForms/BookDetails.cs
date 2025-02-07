@@ -29,6 +29,11 @@ namespace LibrarySystem
             kryptonGroupBox1.CaptionVisible = false;
         }
 
+        private void BookDetails_Deactivate(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();

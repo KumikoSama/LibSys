@@ -182,7 +182,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CountryCode.cs" />
+    <Compile Include="Classes\LoadComboBox.cs" />
     <Compile Include="Classes\CurrentUser.cs" />
     <Compile Include="Classes\Forms.cs">
       <SubType>Form</SubType>
@@ -910,6 +910,8 @@
     <Content Include="packages\System.ValueTuple.4.5.0\THIRD-PARTY-NOTICES.TXT" />
     <Content Include="packages\System.ValueTuple.4.5.0\useSharedDesignerContext.txt" />
     <Content Include="packages\System.ValueTuple.4.5.0\version.txt" />
+    <None Include="Resources\refresh_brown.png" />
+    <None Include="Resources\refresh.png" />
     <None Include="Resources\warning.png" />
     <None Include="Resources\success.png" />
     <None Include="Resources\show.png" />

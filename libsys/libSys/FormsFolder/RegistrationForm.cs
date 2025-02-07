@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,23 +14,22 @@ namespace LibrarySystem
 {
     public partial class RegistrationForm : KryptonForm
     {
-        readonly Functions functions;
-
         public RegistrationForm()
         {
             InitializeComponent();
-            functions = new Functions();
-            CountryCode.LoadCountryCodes(cmbbxCountryCode);
-        }
-
-        private void exitbtnapp_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            LoadComboBox.LoadCountryCodes(cmbbxCountryCode);
+            cmbbxGender.DataSource = LoadComboBox.Gender();
+            cmbbxContactMethod.DataSource = LoadComboBox.ContactMethod();
         }
 
         private void RegistrationForm_Load(object sender, EventArgs e)
         {
             Functions.CenteredPanels(this, secondPanel, firstPanel);
+        }
+
+        private void exitbtnapp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -100,13 +98,19 @@ namespace LibrarySystem
 
         private void cmbbxContactMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            functions.ContactMethod(cmbbxContactMethod, cmbbxCountryCode, lblEmailorPhone, txtbxContactMethod, txtbxCode);
+            Functions.ContactMethod(cmbbxContactMethod, cmbbxCountryCode, lblEmailorPhone, txtbxContactMethod, txtbxCode);
             txtbxContactMethod.Clear();
         }
 
         private void txtbxPassword_TextChanged(object sender, EventArgs e)
         {
             Functions.PasswordRequirements(txtbxPassword, chckBxFirstRequirement, chckBxSecondRequirement, chckBxThirdRequirement);
+        }
+
+        private void checkBoxCheck_Click(object sender, EventArgs e)
+        {
+            KryptonCheckBox checkBox = sender as KryptonCheckBox;
+            checkBox.Checked = !checkBox.Checked;
         }
     }
 }
