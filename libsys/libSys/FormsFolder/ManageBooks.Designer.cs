@@ -234,6 +234,7 @@
             this.datagridBooks.Palette = this.kryptonPalette2;
             this.datagridBooks.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.datagridBooks.ReadOnly = true;
+            this.datagridBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridBooks.Size = new System.Drawing.Size(377, 414);
             this.datagridBooks.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.datagridBooks.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
@@ -308,34 +309,6 @@
             // genreListBox
             // 
             this.genreListBox.Enabled = false;
-            this.genreListBox.Items.AddRange(new object[] {
-            "Romance",
-            "Fantasy",
-            "Tragedy",
-            "Chick Lit",
-            "Fiction",
-            "Science Fiction",
-            "Biography",
-            "Children\'s",
-            "Cookbook",
-            "Classics",
-            "Historical Fiction",
-            "LGBTQ+",
-            "Mystery and Thriller",
-            "Science Fiction",
-            "Nonfiction",
-            "Horror",
-            "Suspense",
-            "Coming of Age",
-            "Post Apocalyptic",
-            "Historical",
-            "Self Help",
-            "Psychology",
-            "Philosophy",
-            "Young Adult",
-            "Adventure",
-            "Supernatural",
-            "Comedy"});
             this.genreListBox.Location = new System.Drawing.Point(20, 408);
             this.genreListBox.Name = "genreListBox";
             this.genreListBox.Palette = this.kryptonPalette2;

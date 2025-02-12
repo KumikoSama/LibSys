@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
 using ComponentFactory.Krypton.Toolkit;
 using LibrarySystem.Classes;
 
@@ -17,14 +16,10 @@ namespace LibrarySystem
         public RegistrationForm()
         {
             InitializeComponent();
+
             LoadComboBox.LoadCountryCodes(cmbbxCountryCode);
             cmbbxGender.DataSource = LoadComboBox.Gender();
             cmbbxContactMethod.DataSource = LoadComboBox.ContactMethod();
-        }
-
-        private void RegistrationForm_Load(object sender, EventArgs e)
-        {
-            Functions.CenteredPanels(this, secondPanel, firstPanel);
         }
 
         private void exitbtnapp_Click(object sender, EventArgs e)
@@ -34,19 +29,20 @@ namespace LibrarySystem
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            Functions.CenteredPanels(this, firstPanel, secondPanel);
+            firstPanel.Hide();
+            secondPanel.Show();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Functions.CenteredPanels(this, secondPanel, firstPanel);
+            firstPanel.Show();
+            secondPanel.Hide();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            Functions.Register(this, (new KryptonComboBox[] { cmbbxAge, cmbbxGender, cmbbxContactMethod },
-                new KryptonTextBox[] { txtbxFname, txtbxLname, txtbxUsername, txtbxPassword, txtbxContactMethod, txtbxCode },
-                new Label[] { errorFname, errorLname, errorCmbBxAge, errorCmbBxGender, errorTxtBxContactMethod, errorUsername, errorPassword }));
+            Functions.Register(this, new KryptonComboBox[] { cmbbxAge, cmbbxGender, cmbbxContactMethod }, new KryptonTextBox[] { txtbxFname, txtbxLname, txtbxUsername, txtbxPassword, txtbxContactMethod, txtbxCode },
+                new Label[] { errorFname, errorLname, errorCmbBxAge, errorCmbBxGender, errorTxtBxContactMethod, errorUsername, errorPassword });
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)

@@ -157,13 +157,12 @@
             this.firstPanel.Controls.Add(this.txtbxLname);
             this.firstPanel.Controls.Add(this.txtbxFname);
             this.firstPanel.Controls.Add(this.pictureBox3);
-            this.firstPanel.Location = new System.Drawing.Point(556, 1);
+            this.firstPanel.Location = new System.Drawing.Point(249, 28);
             this.firstPanel.Name = "firstPanel";
             this.firstPanel.Palette = this.kryptonPalette1;
             this.firstPanel.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.firstPanel.Size = new System.Drawing.Size(498, 494);
             this.firstPanel.TabIndex = 2;
-            this.firstPanel.Visible = false;
             // 
             // cmbbxAge
             // 
@@ -506,12 +505,13 @@
             this.secondPanel.Controls.Add(this.txtbxContactMethod);
             this.secondPanel.Controls.Add(this.btnHidePassword);
             this.secondPanel.Controls.Add(this.btnShowPassword);
-            this.secondPanel.Location = new System.Drawing.Point(52, 1);
+            this.secondPanel.Location = new System.Drawing.Point(249, 28);
             this.secondPanel.Name = "secondPanel";
             this.secondPanel.Palette = this.kryptonPalette1;
             this.secondPanel.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.secondPanel.Size = new System.Drawing.Size(498, 494);
             this.secondPanel.TabIndex = 3;
+            this.secondPanel.Visible = false;
             // 
             // cmbbxContactMethod
             // 
@@ -604,7 +604,7 @@
             this.errorTxtBxContactMethod.BackColor = System.Drawing.Color.Transparent;
             this.errorTxtBxContactMethod.Font = new System.Drawing.Font("Baskerville Old Face", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorTxtBxContactMethod.ForeColor = System.Drawing.Color.Tomato;
-            this.errorTxtBxContactMethod.Location = new System.Drawing.Point(243, 176);
+            this.errorTxtBxContactMethod.Location = new System.Drawing.Point(243, 178);
             this.errorTxtBxContactMethod.Name = "errorTxtBxContactMethod";
             this.errorTxtBxContactMethod.Size = new System.Drawing.Size(141, 14);
             this.errorTxtBxContactMethod.TabIndex = 29;
@@ -613,13 +613,14 @@
             // 
             // txtbxCode
             // 
+            this.txtbxCode.Enabled = false;
             this.txtbxCode.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxCode.Location = new System.Drawing.Point(141, 148);
+            this.txtbxCode.Location = new System.Drawing.Point(141, 153);
             this.txtbxCode.Name = "txtbxCode";
             this.txtbxCode.Palette = this.kryptonPalette2;
             this.txtbxCode.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtbxCode.ReadOnly = true;
-            this.txtbxCode.Size = new System.Drawing.Size(33, 23);
+            this.txtbxCode.Size = new System.Drawing.Size(39, 23);
             this.txtbxCode.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(253)))));
             this.txtbxCode.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -649,7 +650,7 @@
             this.cmbbxCountryCode.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
             this.cmbbxCountryCode.Items.AddRange(new object[] {
             "+63"});
-            this.cmbbxCountryCode.Location = new System.Drawing.Point(135, 145);
+            this.cmbbxCountryCode.Location = new System.Drawing.Point(135, 150);
             this.cmbbxCountryCode.Name = "cmbbxCountryCode";
             this.cmbbxCountryCode.Palette = this.kryptonPalette2;
             this.cmbbxCountryCode.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -745,6 +746,7 @@
             // 
             // txtbxContactMethod
             // 
+            this.txtbxContactMethod.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtbxContactMethod.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
             this.txtbxContactMethod.Location = new System.Drawing.Point(137, 144);
             this.txtbxContactMethod.Name = "txtbxContactMethod";
@@ -802,11 +804,11 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(996, 550);
-            this.Controls.Add(this.secondPanel);
             this.Controls.Add(this.btnGoBack);
-            this.Controls.Add(this.firstPanel);
             this.Controls.Add(this.exitbtnapp);
             this.Controls.Add(this.exitbtn);
+            this.Controls.Add(this.secondPanel);
+            this.Controls.Add(this.firstPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximumSize = new System.Drawing.Size(1366, 768);
             this.Name = "RegistrationForm";
@@ -816,7 +818,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegistrationForm_FormClosed);
-            this.Load += new System.EventHandler(this.RegistrationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.exitbtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.firstPanel)).EndInit();
             this.firstPanel.ResumeLayout(false);

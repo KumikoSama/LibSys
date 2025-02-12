@@ -9,24 +9,20 @@ namespace LibrarySystem
     public partial class BookDetails : KryptonForm
     {
         public static BookDetails Instance { get; private set; } = null;
-        string bookDescription, bookTitle, bookAuthor;
-        Image image;
 
         public BookDetails(string bookDescription, string bookTitle, string bookAuthor, Image image)
         {
             InitializeComponent();
-            this.bookDescription = bookDescription;
-            this.bookTitle = bookTitle;
-            this.bookAuthor = bookAuthor;
-            this.image = image;
-            Instance = this;
-        }
 
-        private void BookDetails_Load(object sender, EventArgs e)
-        {
-            Functions.DisplayBookDetails(picbxBookCover, lblBookTitle, lblBookAuthor, txtbxBookDesc, image,
-                bookTitle, bookAuthor, bookDescription);
             kryptonGroupBox1.CaptionVisible = false;
+            Instance = this;
+
+            picbxBookCover.Image = image;
+            lblBookTitle.Text = bookTitle;
+            lblBookAuthor.Text = bookAuthor;
+            txtbxBookDesc.Text = bookDescription;
+            txtbxBookDesc.SelectAll();
+            txtbxBookDesc.SelectionAlignment = HorizontalAlignment.Center;
         }
 
         private void BookDetails_Deactivate(object sender, EventArgs e)

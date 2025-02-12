@@ -52,10 +52,13 @@ namespace LibrarySystem
         private void btnDeclinedRequests_Click(object sender, EventArgs e)
         {
             Functions.ClearTextBoxes(this, txtBxBookName, txtBxBorrowDuration, txtbxCopies, txtBxMemberName);
-            Functions.LoadDeclineRequests(dataGridPendingRequests);
+            Functions.LoadData("LoadDeclinedRequests", dataGridPendingRequests, false);
             Functions.ShowControls(this, btnAllPendingRequests);
             Functions.HideControls(this, btnDecline, btnApprove, btnDecline, dueDateEstimation, lblEstimatedDueDate, btnDeclinedRequests);
+
             lblPendingRequests.Text = "Declined Requests";
+            dataGridPendingRequests.Columns["MemberID"].Visible = false;
+            dataGridPendingRequests.Columns["BookID"].Visible = false;
         }
 
         private void btnAllPendingRequests_Click(object sender, EventArgs e)

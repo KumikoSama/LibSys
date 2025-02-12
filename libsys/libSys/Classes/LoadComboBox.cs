@@ -67,8 +67,10 @@ namespace LibrarySystem.Classes
             comboBoxCountries.ValueMember = "Code"; // Property to use as value
         }
 
-        public static void Genres(KryptonComboBox cmbbxGenre)
+        public static object Genres()
         {
+            List<string> genre = new List<string>();
+
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 conn.Open();
@@ -79,10 +81,11 @@ namespace LibrarySystem.Classes
                 {
                     while(reader.Read())
                     {
-                        cmbbxGenre.Items.Add(reader["Genre"].ToString());
+                        genre.Add(reader["Genre"].ToString());
                     }
                 }
             }
+            return genre;
         }
 
         public static object Gender()

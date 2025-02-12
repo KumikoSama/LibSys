@@ -53,10 +53,7 @@ namespace LibrarySystem.Classes
 
             try
             {
-                if (!string.IsNullOrWhiteSpace(gender) && comboBox.Items.Contains(gender))
-                {
-                    return true;
-                }
+                if (!string.IsNullOrWhiteSpace(gender) && comboBox.Items.Contains(gender)) return true;
                 else throw new FormatException();
             }
             catch (FormatException)
@@ -192,54 +189,61 @@ namespace LibrarySystem.Classes
             }
         }
 
-        public static bool ValidateCredentials(KryptonTextBox txtbxcontactmethod, KryptonTextBox txtbxpass, string query, Label errorContactMethod, Label errorPassword)
+        public static bool ValidateCredentials(KryptonTextBox txtbxcontactmethod, KryptonTextBox txtbxpass, Label errorContactMethod, Label errorPassword)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 string parsePass, parseContactMethod;
-                
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                SqlCommand cmd = new SqlCommand("LogIn", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddRange(new SqlParameter[] {
+                    new SqlParameter("@ContactMethod", txtbxcontactmethod.Text),
+                    new SqlParameter("@Password", txtbxpass.Text),
+                    new SqlParameter("@Role", CurrentUser.Role)
+                });
+
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ContactMethod", CurrentUser.ContactMethod);
-                    cmd.Parameters.AddWithValue("@Password", CurrentUser.Password);
-
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
+                        parseContactMethod = reader.GetString(0);
+                        parsePass = reader.GetString(1);
+
+                        if (parseContactMethod == txtbxcontactmethod.Text)
                         {
-                            parseContactMethod = reader.GetString(0);
-                            parsePass = reader.GetString(1);
+                            ErrorTextBoxes(true, errorContactMethod, txtbxcontactmethod);
 
-                            if (parsePass == CurrentUser.Password || parseContactMethod == CurrentUser.ContactMethod)
+                            if (parsePass == txtbxpass.Text)
                             {
-                                isValid = true;
-                                ErrorTextBoxes(isValid, errorPassword, txtbxpass);
-                                ErrorTextBoxes(isValid, errorContactMethod, txtbxcontactmethod);
+                                ErrorTextBoxes(true, errorPassword, txtbxpass);
+                                return true;
                             }
-
-                            if (parseContactMethod != CurrentUser.ContactMethod)
+                            else
                             {
-                                isValid = false;
-                                ErrorTextBoxes(isValid, errorContactMethod, txtbxcontactmethod);
-                            }
-                            if (parsePass != CurrentUser.Password)
-                            {
-                                isValid = false;
-                                ErrorTextBoxes(isValid, errorPassword, txtbxpass);
+                                ErrorTextBoxes(false, errorPassword, txtbxpass);
+                                return false;
                             }
                         }
                         else
                         {
-                            isValid = false;
-                            ErrorTextBoxes(isValid, errorPassword, txtbxpass);
-                            ErrorTextBoxes(isValid, errorContactMethod, txtbxcontactmethod);
-                            SideForms.CustomMessageBox.ShowOK("No accounts matched.", "Error", Resources.information);
+                            ErrorTextBoxes(false, errorContactMethod, txtbxcontactmethod);
+                            ErrorTextBoxes(false, errorPassword, txtbxpass);
+
+                            return false;
                         }
                     }
-                    return isValid;
+                    else
+                    {
+                        isValid = false;
+                        ErrorTextBoxes(false, errorContactMethod, txtbxcontactmethod);
+                        ErrorTextBoxes(false, errorPassword, txtbxpass);
+                        SideForms.CustomMessageBox.ShowOK("No accounts matched.", "Error", Resources.error);
+                    }
                 }
+                return isValid;
             }
         }
 

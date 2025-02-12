@@ -234,10 +234,10 @@
             this.Controls.Add(this.kryptonGroupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BookDetails";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BookDetails";
             this.Deactivate += new System.EventHandler(this.BookDetails_Deactivate);
-            this.Load += new System.EventHandler(this.BookDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picbxBookCover)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();

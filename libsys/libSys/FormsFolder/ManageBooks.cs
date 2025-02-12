@@ -24,6 +24,8 @@ namespace LibrarySystem
                 if (control is KryptonTextBox textBox)
                     txtBxInitialValues[textBox] = textBox.Text;
             }
+
+            genreListBox.DataSource = LoadComboBox.Genres();
         }
 
         private void ManageBooks_Load(object sender, EventArgs e)
@@ -49,8 +51,7 @@ namespace LibrarySystem
             Functions.ShowControls(this, btnEditBook, btnSaveNewBook);
             Functions.EmptyTextboxes(bookCoverImage, genreListBox, txtbxTitle, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxYear);
             Functions.RefreshTextBoxes(txtBxInitialValues);
-            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
-                lnklblUploadImage, genreListBox);
+            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear, lnklblUploadImage, genreListBox);
 
             datagridBooks.Enabled = false;
         }
@@ -59,8 +60,7 @@ namespace LibrarySystem
         {
             Functions.HideControls(this, btnEditBook, btnSaveNewBook);
             Functions.ShowControls(this, btnAddNewBook, btnSaveChanges);
-            Functions.EnableDisableControls(true, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
-                lnklblUploadImage, genreListBox, btnSaveChanges);
+            Functions.EnableDisableControls(true, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear, lnklblUploadImage, genreListBox, btnSaveChanges);
 
             datagridBooks.Enabled = true;
         }
@@ -91,8 +91,7 @@ namespace LibrarySystem
             txtbxDescription.SelectAll();
             txtbxDescription.SelectionAlignment = HorizontalAlignment.Center;
 
-            if (bookCoverImage.Image == null)
-                lnklblRemoveImage.Visible = false;
+            if (bookCoverImage.Image == null) lnklblRemoveImage.Visible = false;
             else lnklblRemoveImage.Visible = true;
         }
 
@@ -103,7 +102,8 @@ namespace LibrarySystem
 
         private void lnklblRemoveImage_LinkClicked(object sender, EventArgs e)
         {
-            Functions.RemoveImage(bookCoverImage);
+            bookCoverImage.Image = null;
+            bookCoverImage.BackColor = Color.Silver;
         }
 
         private void btnSaveNewBook_Click(object sender, EventArgs e)

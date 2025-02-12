@@ -38,13 +38,13 @@
             this.lblBorrowDuration = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblCopies = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblBookTitle = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.datagridBooks = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.Worker = new System.ComponentModel.BackgroundWorker();
             this.btnGoBack = new System.Windows.Forms.Button();
             this.cmbbxCopies = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.datagridBooks = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxBorrowDuration)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxCopies)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridBooks)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPalette1
@@ -231,24 +231,6 @@
             this.lblBookTitle.TabIndex = 23;
             this.lblBookTitle.Values.Text = "Book Title:";
             // 
-            // datagridBooks
-            // 
-            this.datagridBooks.AllowUserToOrderColumns = true;
-            this.datagridBooks.AllowUserToResizeColumns = false;
-            this.datagridBooks.AllowUserToResizeRows = false;
-            this.datagridBooks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.datagridBooks.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.datagridBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridBooks.Location = new System.Drawing.Point(187, 272);
-            this.datagridBooks.MultiSelect = false;
-            this.datagridBooks.Name = "datagridBooks";
-            this.datagridBooks.Palette = this.kryptonPalette1;
-            this.datagridBooks.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.datagridBooks.Size = new System.Drawing.Size(606, 222);
-            this.datagridBooks.TabIndex = 25;
-            this.datagridBooks.VirtualMode = true;
-            this.datagridBooks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridBooks_CellClick);
-            // 
             // Worker
             // 
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
@@ -288,6 +270,43 @@
             this.cmbbxCopies.TabIndex = 29;
             this.cmbbxCopies.Text = "1";
             // 
+            // datagridBooks
+            // 
+            this.datagridBooks.AllowUserToAddRows = false;
+            this.datagridBooks.AllowUserToDeleteRows = false;
+            this.datagridBooks.AllowUserToResizeColumns = false;
+            this.datagridBooks.AllowUserToResizeRows = false;
+            this.datagridBooks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.datagridBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridBooks.Location = new System.Drawing.Point(152, 276);
+            this.datagridBooks.MultiSelect = false;
+            this.datagridBooks.Name = "datagridBooks";
+            this.datagridBooks.Palette = this.kryptonPalette1;
+            this.datagridBooks.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.datagridBooks.ReadOnly = true;
+            this.datagridBooks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.datagridBooks.Size = new System.Drawing.Size(677, 223);
+            this.datagridBooks.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            this.datagridBooks.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.datagridBooks.StateCommon.DataCell.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.datagridBooks.StateCommon.DataCell.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.DataCell.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.DataCell.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.datagridBooks.StateCommon.DataCell.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.DataCell.Content.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.datagridBooks.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.datagridBooks.StateCommon.HeaderColumn.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.HeaderColumn.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.datagridBooks.StateCommon.HeaderColumn.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.datagridBooks.StateSelected.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(108)))), ((int)(((byte)(56)))));
+            this.datagridBooks.TabIndex = 30;
+            this.datagridBooks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridBooks_CellClick);
+            // 
             // BorrowBook
             // 
             this.AcceptButton = this.btnBorrow;
@@ -296,9 +315,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.CancelButton = this.btnGoBack;
             this.ClientSize = new System.Drawing.Size(980, 511);
+            this.Controls.Add(this.datagridBooks);
             this.Controls.Add(this.cmbbxCopies);
             this.Controls.Add(this.btnGoBack);
-            this.Controls.Add(this.datagridBooks);
             this.Controls.Add(this.lblBookTitle);
             this.Controls.Add(this.lblCopies);
             this.Controls.Add(this.lblBorrowDuration);
@@ -312,10 +331,9 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Borrow Book";
-            this.Load += new System.EventHandler(this.BorrowBook_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxBorrowDuration)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridBooks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbbxCopies)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridBooks)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,10 +347,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblBorrowDuration;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblCopies;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblBookTitle;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView datagridBooks;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private System.ComponentModel.BackgroundWorker Worker;
         private System.Windows.Forms.Button btnGoBack;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbbxCopies;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView datagridBooks;
     }
 }

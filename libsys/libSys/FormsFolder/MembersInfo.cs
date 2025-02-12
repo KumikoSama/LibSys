@@ -22,7 +22,7 @@ namespace LibrarySystem.FormsFolder
 
         private void MembersInfo_Load(object sender, EventArgs e)
         {
-            Functions.LoadAll("LoadMemberInfo", datagridMembers, "MemberID");
+            Functions.LoadData("LoadMemberInfo", datagridMembers, false);
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)

@@ -9,7 +9,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LibrarySystem
 {
@@ -18,109 +17,85 @@ namespace LibrarySystem
         static byte[] imageBytes = null;
 
         #region FrontPage
-        public static void Login(KryptonForm form, KryptonTextBox txtbxContactMethod, KryptonTextBox txtbxpass, KryptonComboBox cmbbxcurrentuser,
-            Label errorContactMethod, Label errorPassword)
+        public static void Login(KryptonForm form, KryptonTextBox txtbxContactMethod, KryptonTextBox txtbxpass, KryptonComboBox cmbbxcurrentuser, Label errorContactMethod, Label errorPassword)
         {
-            Classes.CurrentUser.ContactMethod = txtbxContactMethod.Text;
-            Classes.CurrentUser.Password = txtbxpass.Text;
-            Classes.CurrentUser.Username = Functions.GetUsername(Classes.CurrentUser.ContactMethod, Classes.CurrentUser.Password);
-            Classes.CurrentUser.UserID = Functions.GetMemberID(Classes.CurrentUser.ContactMethod, Classes.CurrentUser.Password);
-            Classes.CurrentUser.Role = Functions.CurrentUser(cmbbxcurrentuser);
+            Classes.CurrentUser.Role = Functions.GetCurrentUser(cmbbxcurrentuser);
 
-            if (Classes.CurrentUser.Role == "Member")
+            if (Validator.ValidateCredentials(txtbxContactMethod, txtbxpass, errorContactMethod, errorPassword))
             {
-                if (Validator.ValidateCredentials(txtbxContactMethod, txtbxpass, "LogInMember", errorContactMethod, errorPassword))
-                {
-                    SwitchForms(Forms.Dashboard(), form);
-                }
+                Classes.CurrentUser.ContactMethod = txtbxContactMethod.Text;
+                Classes.CurrentUser.Password = txtbxpass.Text;
+                Classes.CurrentUser.Username = Functions.GetUsername(Classes.CurrentUser.ContactMethod, Classes.CurrentUser.Password);
+                Classes.CurrentUser.UserID = Functions.GetMemberID(Classes.CurrentUser.ContactMethod, Classes.CurrentUser.Password);
+
+                SwitchForms(Forms.Dashboard(), form);
             }
-            else
-            {
-                if (Validator.ValidateCredentials(txtbxContactMethod, txtbxpass, "LogInAdmin", errorContactMethod, errorPassword))
-                {
-                    SwitchForms(Forms.Dashboard(), form);
-                }
-            }
+
         }
 
         #endregion
 
         #region RegistrationForm
 
-        public static void Register(KryptonForm form, params (KryptonComboBox[] comboBoxes, KryptonTextBox[] textBoxes, Label[] errorLabels)[] parameterSets)
+        public static void Register(KryptonForm form, KryptonComboBox[] comboBoxes, KryptonTextBox[] textBoxes, Label[] errorLabels)
         {
             try
             {
                 User user = new User();
 
-                foreach (var (comboBoxes, textBoxes, errorLabels) in parameterSets)
+                var validations = new List<bool>
                 {
-                    var validations = new List<bool>
-                    {
-                        Validator.ValidateName(textBoxes[0], errorLabels[0]),
-                        Validator.ValidateName(textBoxes[1], errorLabels[1]),
-                        Validator.ValidateAge(comboBoxes[0], errorLabels[2]),
-                        Validator.ValidateGender(comboBoxes[1], errorLabels[3]),
-                        Validator.ValidatePassword(textBoxes[3], errorLabels[6]),
-                        Validator.ValidateUsername(textBoxes[2], errorLabels[5])
-                    };
+                    Validator.ValidateName(textBoxes[0], errorLabels[0]),
+                    Validator.ValidateName(textBoxes[1], errorLabels[1]),
+                    Validator.ValidateAge(comboBoxes[0], errorLabels[2]),
+                    Validator.ValidateGender(comboBoxes[1], errorLabels[3]),
+                    Validator.ValidatePassword(textBoxes[3], errorLabels[6]),
+                    Validator.ValidateUsername(textBoxes[2], errorLabels[5])
+                };
 
-                    if (comboBoxes[2].SelectedItem.ToString() == "Email" && Validator.ValidateEmail(textBoxes[4], errorLabels[4]))
-                        user.ContactMethod = textBoxes[4].Text;
-                    else if (comboBoxes[2].SelectedItem.ToString() == "Phone Number" && Validator.ValidatePhoneNum(textBoxes[4], errorLabels[4]))
-                        user.ContactMethod = textBoxes[5].Text + textBoxes[4].Text; ;
+                if (comboBoxes[2].SelectedItem.ToString() == "Email" && Validator.ValidateEmail(textBoxes[4], errorLabels[4]))
+                    user.ContactMethod = textBoxes[4].Text;
+                else if (comboBoxes[2].SelectedItem.ToString() == "Phone Number" && Validator.ValidatePhoneNum(textBoxes[4], errorLabels[4]))
+                    user.ContactMethod = textBoxes[5].Text + textBoxes[4].Text;
 
-                    if (validations.Any(result => !result))
-                        throw new FormatException();
+                if (validations.Any(result => !result))
+                    throw new FormatException();
 
-                    user.FirstName = Validator.CapitalizeFirstLetter(textBoxes[0].Text);
-                    user.LastName = Validator.CapitalizeFirstLetter(textBoxes[1].Text);
-                    user.Age = comboBoxes[0].SelectedItem.ToString();
-                    user.Gender = comboBoxes[1].SelectedItem.ToString();
-                    user.Username = textBoxes[2].Text;
-                    user.Password = textBoxes[3].Text;
-                }
+                user.FirstName = Validator.CapitalizeFirstLetter(textBoxes[0].Text);
+                user.LastName = Validator.CapitalizeFirstLetter(textBoxes[1].Text);
+                user.Age = comboBoxes[0].SelectedItem.ToString();
+                user.Gender = comboBoxes[1].SelectedItem.ToString();
+                user.Username = textBoxes[2].Text;
+                user.Password = textBoxes[3].Text;
 
-                ExecuteQuery("InsertMemberInfo",
-                    new SqlParameter("@FirstName", user.FirstName),
-                    new SqlParameter("@LastName", user.LastName),
-                    new SqlParameter("@Age", user.Age),
-                    new SqlParameter("@Gender", user.Gender),
-                    new SqlParameter("@Username", user.Username),
-                    new SqlParameter("ContactMethod", user.ContactMethod),
-                    new SqlParameter("@Password", user.Password));
+                ExecuteQuery("InsertMemberInfo", new SqlParameter("@FirstName", user.FirstName), new SqlParameter("@LastName", user.LastName), new SqlParameter("@Age", user.Age), new SqlParameter("@Gender", user.Gender),
+                    new SqlParameter("@Username", user.Username), new SqlParameter("ContactMethod", user.ContactMethod), new SqlParameter("@Password", user.Password));
 
                 SideForms.CustomMessageBox.ShowOK("Registration complete!", "Account Created", Resources.success);
                 SwitchForms(Forms.FrontPage(), form);
             }
             catch (FormatException)
             {
-                SideForms.CustomMessageBox.ShowOK("Please correct the errors on the form", "Something went wrong",
-                    Resources.error);
+                SideForms.CustomMessageBox.ShowOK("Please correct the errors on the form", "Something went wrong", Resources.error);
             }
             catch (Exception ex)
             {
-                SideForms.CustomMessageBox.ShowOK(ex.Message, "Something went wrong",
-                    Resources.error);
+                SideForms.CustomMessageBox.ShowOK(ex.Message, "Something went wrong", Resources.error);
             }
         }
 
         public static void PasswordRequirements(KryptonTextBox password, params KryptonCheckBox[] checkBoxes)
         {
-            if (password.Text.Any(char.IsUpper))
-                checkBoxes[0].CheckState = CheckState.Checked;
-            else
-                checkBoxes[0].CheckState = CheckState.Unchecked;
+            var conditions = new Func<string, bool>[]
+            {
+                text => text.Any(char.IsUpper),
+                text => text.Length >= 8,
+                text => text.Any(char.IsDigit)
+            };
 
-            if (password.Text.Length >= 8)
-                checkBoxes[1].CheckState = CheckState.Checked;
-            else
-                checkBoxes[1].CheckState = CheckState.Unchecked;
+            for (int i = 0; i < conditions.Length; i++)
+                checkBoxes[i].CheckState = conditions[i](password.Text) ? CheckState.Checked : CheckState.Unchecked;
 
-            if (password.Text.Any(char.IsNumber))
-                checkBoxes[2].CheckState = CheckState.Checked;
-            else
-                checkBoxes[2].CheckState = CheckState.Unchecked;
         }
 
         public static void ContactMethod(KryptonComboBox comboBox, KryptonComboBox cmbbxCountryCode, KryptonLabel lblContactMethod,
@@ -152,9 +127,8 @@ namespace LibrarySystem
 
         public static void LoadBorrowedBooks(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
-            if (Classes.CurrentUser.Role == "Member")
-                LoadData("LoadBorrowedBooks", datagridBooks, true, "MemberID", "BorrowID");
-            else LoadData("LoadBorrowedBooks", datagridBooks, false, "MemberID", "BorrowID");
+            if (Classes.CurrentUser.Role == "Member") LoadData("LoadBorrowedBooks", datagridBooks, true);
+            else LoadData("LoadBorrowedBooks", datagridBooks, false);
             lblFormChange.Text = "Borrowed Books";
         }
 
@@ -162,10 +136,8 @@ namespace LibrarySystem
         {
             try
             {
-                if (Classes.CurrentUser.Role == "Member")
-                    LoadData("LoadOverdueBooks", datagridBooks, true, "MemberID", "BorrowID");
-                else
-                    LoadData("LoadAllOverdueBooks", datagridBooks, false, "MemberID", "BorrowID");
+                if (Classes.CurrentUser.Role == "Member") LoadData("LoadOverdueBooks", datagridBooks, true);
+                else LoadData("LoadOverdueBooks", datagridBooks, false);
 
                 lblFormChange.Text = "Overdue Books";
                 datagridBooks.Columns["BorrowID"].Visible = false;
@@ -176,22 +148,50 @@ namespace LibrarySystem
             }
         }
 
-        public static void CheckUserOverdue(Form form, KryptonButton btnBorrow)
+        public static void CheckOverdue(Form form, KryptonButton btnBorrow)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("CheckUserOverdue", conn);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("CheckOverdue", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
 
-                conn.Open();
-                int rowsAffected = (int)cmd.ExecuteScalar();
+                object result = cmd.ExecuteScalar();
+                int rowsAffected = result as int? ?? 0; // If null, default to 0
 
                 if (rowsAffected > 0)
                 {
-                    SideForms.CustomMessageBox.ShowOK($"You have {rowsAffected} overdue books\nSettle it first before you can borrow againg",
-                            "Overdue books", Resources.information);
+                    SideForms.CustomMessageBox.ShowOK($"You have {rowsAffected} overdue books\nSettle it first before you can borrow again", "Overdue books", Resources.information);
                     form.Controls.Remove(btnBorrow);
+                }
+            }
+        }
+
+        public static void GetPopularBooks(PictureBox[] pictureBoxes, Label[] labels)
+        {
+            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
+            {
+                conn.Open();
+                
+                SqlCommand cmd = new SqlCommand("GetPopularBooks", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    for (int i = 0; i < pictureBoxes.Length && reader.Read(); i++)
+                    {
+                        if (reader["BookCover"] != DBNull.Value)
+                        {
+                            byte[] data = (byte[])reader["BookCover"];
+                            MemoryStream ms = new MemoryStream(data);
+                            pictureBoxes[i].Image = Image.FromStream(ms);
+                        }
+
+                        labels[i].Text = $"{reader.GetString(1)}\n{reader.GetString(2)}\n{reader.GetInt16(3)}";
+                    }
                 }
             }
         }
@@ -213,22 +213,12 @@ namespace LibrarySystem
                     byte[] bookCover = (byte[])selectedRow.Cells["BookCover"].Value;
                     MemoryStream ms = new MemoryStream(bookCover);
                     Image image = Image.FromStream(ms);
+
                     BookDetails bookDetails = new BookDetails(description, title, author, image);
                     bookDetails.Show();
                 }
             }
             return isButtonClicked;
-        }
-
-        public static void DisplayBookDetails(PictureBox picbxBookCover, Label lblBookTitle, Label lblBookAuthor,
-            KryptonRichTextBox txtbxBookDesc, Image image, string bookTitle, string bookAuthor, string bookDescription)
-        {
-            picbxBookCover.Image = image;
-            lblBookTitle.Text = bookTitle;
-            lblBookAuthor.Text = bookAuthor;
-            txtbxBookDesc.Text = bookDescription;
-            txtbxBookDesc.SelectAll();
-            txtbxBookDesc.SelectionAlignment = HorizontalAlignment.Center;
         }
 
         public static void SortGenre(KryptonDataGridView dtBooks, KryptonComboBox cmbbxgenre, bool isBookmarks)
@@ -270,10 +260,8 @@ namespace LibrarySystem
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
 
-                        if (rowsAffected > 0)
-                            SideForms.CustomMessageBox.ShowOK("Book returned successfully", "Successful", Resources.success);
-                        else
-                            SideForms.CustomMessageBox.ShowOK("No matching record found or the book has already been returned.", "Error", Resources.error);
+                        if (rowsAffected > 0) SideForms.CustomMessageBox.ShowOK("Book returned successfully", "Successful", Resources.success);
+                        else SideForms.CustomMessageBox.ShowOK("No matching record found or the book has already been returned.", "Error", Resources.error);
                     }
                 }
             }
@@ -289,9 +277,9 @@ namespace LibrarySystem
 
         public static void LoadTransactions(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
-            if (Classes.CurrentUser.Role == "Member")
-                LoadData("LoadTransactions", datagridBooks, true, "BookID");
-            else LoadData("LoadTransactions", datagridBooks, false, "BookID");
+            if (Classes.CurrentUser.Role == "Member") LoadData("LoadTransactions", datagridBooks, true);
+            else LoadData("LoadTransactions", datagridBooks, false);
+
             lblFormChange.Text = "Transactions";
         }
 
@@ -372,7 +360,9 @@ namespace LibrarySystem
             ExecuteQuery("DeleteMember", new SqlParameter("@MemberID", memberID));
 
             SideForms.CustomMessageBox.ShowOK("Member successfully removed.", "Member Removed", Resources.success);
-            Functions.LoadAll("LoadMemberInfo", dataGridMembers, "MemberID");
+
+            Functions.LoadData("LoadMemberInfo", dataGridMembers, false);
+            dataGridMembers.Columns["MemberID"].Visible = false;
         }
 
         #region BorrowBook
@@ -414,13 +404,9 @@ namespace LibrarySystem
 
         public static void LoadPendingRequests(KryptonDataGridView dataGridPendingRequests)
         {
-            LoadAll("LoadPendingRequests", dataGridPendingRequests, "BookID");
+            LoadData("LoadPendingRequests", dataGridPendingRequests, false);
             dataGridPendingRequests.Columns["MemberID"].Visible = false;
-        }
-
-        public static void LoadDeclineRequests(KryptonDataGridView dataGridPendingRequests)
-        {
-            LoadAll("LoadDeclinedRequests", dataGridPendingRequests, "BookID");
+            dataGridPendingRequests.Columns["BookID"].Visible = false;
         }
 
         public static void PopulateRequestForm(KryptonDataGridView dataGridPendingRequests, KryptonTextBox txtbxMemberName, KryptonTextBox txtbxBookName, KryptonTextBox txtbxCopies,
@@ -454,13 +440,8 @@ namespace LibrarySystem
             DateTime borrowdate = DateTime.Now;
             DateTime duedate = dueDate.Value;
 
-            ExecuteQuery("InsertBorrowedBook",
-                new SqlParameter("MemberID", memberID),
-                new SqlParameter("@BookID", bookID),
-                new SqlParameter("@BorrowDate", borrowdate),
-                new SqlParameter("@DueDate", duedate),
-                new SqlParameter("@Copies", numberOfCopies)
-                );
+            ExecuteQuery("InsertBorrowedBook", new SqlParameter("MemberID", memberID), new SqlParameter("@BookID", bookID), new SqlParameter("@BorrowDate", borrowdate),
+                new SqlParameter("@DueDate", duedate), new SqlParameter("@Copies", numberOfCopies));
 
             SideForms.CustomMessageBox.ShowOK("Request approved!", "Request Approval", Resources.success);
             LoadPendingRequests(dataGridPendingRequests);
@@ -488,9 +469,7 @@ namespace LibrarySystem
 
             // Remove deselected genres from the selected list
             foreach (string genre in deselectedGenres)
-            {
                 listOfGenres.Remove(genre);
-            }
 
             // Update the list of previous selected items
             previousSelectedGenres = currentSelectedGenres;
@@ -499,6 +478,7 @@ namespace LibrarySystem
         public static List<string> GetBookGenres(int bookID)
         {
             List<string> genres = new List<string>();
+
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
                 conn.Open();
@@ -506,11 +486,11 @@ namespace LibrarySystem
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@BookID", bookID);
+
                     SqlDataReader reader = cmd.ExecuteReader();
+
                     while (reader.Read())
-                    {
                         genres.Add(reader["Genre"].ToString());
-                    }
                 }
             }
             return genres;
@@ -543,12 +523,6 @@ namespace LibrarySystem
                 if (e.Number == 2627)
                     return;
             }
-        }
-
-        public static void RemoveImage(PictureBox bookCoverImage)
-        {
-            bookCoverImage.Image = null;
-            bookCoverImage.BackColor = Color.Silver;
         }
 
         public static void AddNewBook(KryptonTextBox txtbxTitle, KryptonTextBox txtbxAuthor, KryptonTextBox txtbxPublishedYear, KryptonTextBox txtbxCopies, KryptonRichTextBox txtbxDesc)
@@ -643,7 +617,7 @@ namespace LibrarySystem
             }
             catch (ArgumentOutOfRangeException)
             {
-
+                return;
             }
             catch (Exception ex)
             {
@@ -683,6 +657,7 @@ namespace LibrarySystem
                 {
                     SqlCommand cmd = new SqlCommand("SaveEditedBook", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@BookID", bookId);
                     cmd.Parameters.AddWithValue("@BookCover", imageBytes);
                     cmd.Parameters.AddWithValue("@Title", txtbxTitle.Text);
@@ -726,13 +701,11 @@ namespace LibrarySystem
 
         public static void ControlAccess(KryptonForm form, params KryptonButton[] buttons)
         {
-            if (Classes.CurrentUser.Role == "Member")
-                HideControls(form, buttons[0], buttons[6]);
-            else
-                HideControls(form, buttons[1], buttons[2], buttons[3], buttons[4], buttons[5]);
+            if (Classes.CurrentUser.Role == "Member") HideControls(form, buttons[0], buttons[6]);
+            else HideControls(form, buttons[1], buttons[2], buttons[3], buttons[4], buttons[5]);
         }
 
-        public static string CurrentUser(KryptonComboBox cmbbxcurrentUser)
+        public static string GetCurrentUser(KryptonComboBox cmbbxcurrentUser)
         {
             string currentUser;
 
@@ -743,7 +716,7 @@ namespace LibrarySystem
             }
             else
             {
-                currentUser = "Admin";
+                currentUser = "Librarian";
                 return currentUser;
             }
         }
@@ -763,8 +736,8 @@ namespace LibrarySystem
 
                     conn.Open();
                     object result = cmd.ExecuteScalar();
-                    if (result != null)
-                        username = result.ToString();
+
+                    if (result != null) username = result.ToString();
                 }
             }
             return username;
@@ -860,7 +833,7 @@ namespace LibrarySystem
             }
         }
 
-        public static void LoadData(string query, KryptonDataGridView dataTable, bool isMember, params string[] columnID)
+        public static void LoadData(string query, KryptonDataGridView dataTable, bool isMember)
         {
             using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
             {
@@ -868,46 +841,12 @@ namespace LibrarySystem
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 if (isMember)
-                    cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID); 
+                    cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dataTable.DataSource = dt;
-
-                foreach(string id in columnID)
-                    dataTable.Columns[id].Visible = false;
-            }
-        }
-
-        public static void LoadUser(string query, KryptonDataGridView dataTable)
-        {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                dataTable.DataSource = dt;
-            }
-        }
-
-        public static void LoadAll(string query, KryptonDataGridView dataTable, string columnID)
-        {
-            using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                dataTable.DataSource = dt;
-                dataTable.Columns[columnID].Visible = false;
             }
         }
 

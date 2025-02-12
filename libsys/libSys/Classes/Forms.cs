@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ComponentFactory.Krypton.Toolkit;
 using LibrarySystem.FormsFolder;
+using LibrarySystem.SideForms;
 
 namespace LibrarySystem.Classes
 {

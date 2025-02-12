@@ -14,8 +14,6 @@ namespace LibrarySystem
 {
     public partial class FrontPage : KryptonForm
     {
-        //Validator validator;
-
         public FrontPage()
         {
             InitializeComponent();

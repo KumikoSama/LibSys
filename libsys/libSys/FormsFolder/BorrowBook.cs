@@ -9,24 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using LibrarySystem.Classes;
+using LibrarySystem.SideForms;
 
 namespace LibrarySystem
 {
     public partial class BorrowBook : KryptonForm
     {
-        string title;
         int bookID;
 
         public BorrowBook(string title, int bookID)
         {
             InitializeComponent();
-            this.title = title;
-            this.bookID = bookID;
-        }
-
-        private void BorrowBook_Load(object sender, EventArgs e)
-        {
             Worker.RunWorkerAsync();
+
+            this.bookID = bookID;
             txtbxBookTitle.Text = title;
         }
 
@@ -42,6 +38,7 @@ namespace LibrarySystem
             {
                 DataGridViewRow selectedrow = datagridBooks.SelectedRows[0];
                 txtbxBookTitle.Text = selectedrow.Cells["Title"].Value.ToString();
+                bookID = int.Parse(selectedrow.Cells["BookID"].Value.ToString());
             }
         }
 
@@ -51,6 +48,7 @@ namespace LibrarySystem
         }
 
         #region BackgroundWorker
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             e.Result = Functions.LoadAllAvailableBooks();
