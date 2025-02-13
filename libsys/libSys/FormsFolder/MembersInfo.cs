@@ -45,5 +45,11 @@ namespace LibrarySystem.FormsFolder
         {
             Functions.PlaceholderText(txtbxSearch, "Search for a member");
         }
+
+        private void txtbxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtbxSearch.Text != "Search for a member")
+                Functions.Search("SearchMember", txtbxSearch.Text, datagridMembers); 
+        }
     }
 }

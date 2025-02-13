@@ -50,7 +50,7 @@
             this.btnManage = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.exitbtnapp = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblGreeting = new System.Windows.Forms.Label();
             this.btnAddBookmark = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnRemoveBookmark = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lblFormChange = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -430,7 +430,7 @@
             // kryptonPanel2
             // 
             this.kryptonPanel2.Controls.Add(this.exitbtnapp);
-            this.kryptonPanel2.Controls.Add(this.label1);
+            this.kryptonPanel2.Controls.Add(this.lblGreeting);
             this.kryptonPanel2.Location = new System.Drawing.Point(-2, -1);
             this.kryptonPanel2.Name = "kryptonPanel2";
             this.kryptonPanel2.Palette = this.kryptonPalette1;
@@ -450,17 +450,17 @@
             this.exitbtnapp.TabStop = false;
             this.exitbtnapp.Click += new System.EventHandler(this.exitbtnapp_Click);
             // 
-            // label1
+            // lblGreeting
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Baskerville Old Face", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
-            this.label1.Location = new System.Drawing.Point(2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(981, 49);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Welcome to the Bookmark Library!";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblGreeting.BackColor = System.Drawing.Color.Transparent;
+            this.lblGreeting.Font = new System.Drawing.Font("Baskerville Old Face", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGreeting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.lblGreeting.Location = new System.Drawing.Point(2, 0);
+            this.lblGreeting.Name = "lblGreeting";
+            this.lblGreeting.Size = new System.Drawing.Size(981, 49);
+            this.lblGreeting.TabIndex = 13;
+            this.lblGreeting.Text = "Welcome to the Bookmark Library!";
+            this.lblGreeting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnAddBookmark
             // 
@@ -681,7 +681,7 @@
             // grpBxPopularBooks
             // 
             this.grpBxPopularBooks.CaptionVisible = false;
-            this.grpBxPopularBooks.Location = new System.Drawing.Point(109, 54);
+            this.grpBxPopularBooks.Location = new System.Drawing.Point(106, 56);
             this.grpBxPopularBooks.Name = "grpBxPopularBooks";
             // 
             // grpBxPopularBooks.Panel
@@ -895,7 +895,7 @@
         private System.Windows.Forms.PictureBox exitbtnapp;
         private System.ComponentModel.BackgroundWorker Worker;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnConfirmPayment;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblGreeting;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnMembers;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelRequest;
         private System.Windows.Forms.PictureBox picBxRefresh;

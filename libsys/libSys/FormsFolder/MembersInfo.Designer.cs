@@ -151,6 +151,7 @@
             this.datagridMembers.Palette = this.kryptonPalette1;
             this.datagridMembers.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.datagridMembers.ReadOnly = true;
+            this.datagridMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datagridMembers.Size = new System.Drawing.Size(833, 379);
             this.datagridMembers.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             this.datagridMembers.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
@@ -180,8 +181,10 @@
             this.txtbxSearch.Palette = this.kryptonPalette1;
             this.txtbxSearch.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtbxSearch.Size = new System.Drawing.Size(393, 24);
+            this.txtbxSearch.StateCommon.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbxSearch.TabIndex = 5;
             this.txtbxSearch.Text = "Search for a member";
+            this.txtbxSearch.TextChanged += new System.EventHandler(this.txtbxSearch_TextChanged);
             this.txtbxSearch.Enter += new System.EventHandler(this.txtbxSearch_PlaceholderText);
             this.txtbxSearch.Leave += new System.EventHandler(this.txtbxSearch_PlaceholderText);
             // 

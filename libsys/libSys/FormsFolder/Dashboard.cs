@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace LibrarySystem
@@ -36,10 +37,44 @@ namespace LibrarySystem
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            if (Classes.CurrentUser.Role == "Member")
+                lblGreeting.Text = $"Welcome to the Bookmark Library, {Classes.CurrentUser.Username}!";
+
             cmbbxGenre.DataSource = LoadComboBox.Genres();
             Functions.ControlAccess(this, btnManage, btnBookmarks, btnBorrow, btnReturn, btnAddBookmark, btnRemoveBookmark, btnMembers);
             Functions.GetPopularBooks(new PictureBox[] { bookCoverOne, bookCoverTwo, bookCoverThree }, new Label[] { lblBookOne, lblBookTwo, lblBookThree });
         }
+
+        #region NonClickEvents
+
+        private void cmbbxGenre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbbxGenre.SelectedItem.ToString() == "All Books") Worker.RunWorkerAsync();
+            else Functions.SortGenre(datagridBooks, cmbbxGenre, isBookmarks);
+        }
+
+        private void txtbxSearch_PlaceholderText(object sender, EventArgs e)
+        {
+            Functions.PlaceholderText(txtbxSearch, "Search for a book");
+        }
+
+        private void datagridBooks_BooksCount(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            Functions.GetNumberOfBooks(datagridBooks, lblTotal);
+        }
+
+        private void datagridBooks_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            Functions.GetNumberOfBooks(datagridBooks, lblTotal);
+        }
+
+
+        private void cmbbxGenre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        #endregion
 
         #region ButtonClickEvents
 
@@ -50,9 +85,8 @@ namespace LibrarySystem
 
         private void btnViewBook_Click(object sender, EventArgs e)
         {
-            if (BookDetails.Instance == null)
-                Functions.BookDetails(datagridBooks);
-            else return;
+            if (BookDetails.Instance == null) Functions.BookDetails(datagridBooks);
+            else BookDetails.Instance.BringToFront();
         }
 
         private void btnBorrow_Click(object sender, EventArgs e)
@@ -86,6 +120,9 @@ namespace LibrarySystem
                 Functions.ShowControls(this, btnReturn);
             }
             else Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
+
+            datagridBooks.Columns["BookID"].Visible = false;
+            datagridBooks.Columns["BorrowID"].Visible = false;
         }
 
         private void btnAllBooks_Click(object sender, EventArgs e)
@@ -114,12 +151,17 @@ namespace LibrarySystem
             Functions.LoadOverdueBooks(datagridBooks, lblFormChange);
 
             if (CurrentUser.Role == "Member")
+            {
                 Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
+                datagridBooks.Columns["FullName"].Visible = false;
+            }
             else
             {
                 Functions.HideControls(this, btnRemoveBookmark, btnReturn, btnBorrow, btnAddBookmark, btnViewBook, cmbbxGenre, grpBxPopularBooks);
                 Functions.ShowControls(this, btnConfirmPayment);
             }
+
+            datagridBooks.Columns["BookID"].Visible = false;
         }
 
         private void btnBookmarks_Click(object sender, EventArgs e)
@@ -145,8 +187,11 @@ namespace LibrarySystem
         private void btnTransactions_Click(object sender, EventArgs e)
         {
             currentDataLoaded = LoadedData.Transactions;
+
             Functions.LoadTransactions(datagridBooks, lblFormChange);
             Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
+            
+            datagridBooks.Columns["BookID"].Visible = false;
         }
 
         private void btnRemoveBookmark_Click(object sender, EventArgs e)
@@ -190,6 +235,8 @@ namespace LibrarySystem
             }
             else
                 Functions.SwitchForms(Forms.PendingRequests(), this);
+
+            datagridBooks.Columns["BookID"].Visible = false;
         }
 
         private void btnMembers_Click(object sender, EventArgs e)
@@ -229,43 +276,13 @@ namespace LibrarySystem
         {
             SideForms.CustomMessageBox.ShowYesNo("Are you sure you want to cancel this request?", "Borrow Request Cancellation",
                 Resources.question, () => Functions.ExecuteQuery("CancelRequest", new SqlParameter("@MemberID", Classes.CurrentUser.UserID)));
+
             Functions.LoadData("LoadUserPendingRequest", datagridBooks, true);
         }
 
         private void pctrbxLogo_Click(object sender, EventArgs e)
         {
             grpBxPopularBooks.Visible = true;
-        }
-
-        #endregion
-
-        #region NonClickEvents
-
-        private void cmbbxGenre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbbxGenre.SelectedItem.ToString() == "All Books") Worker.RunWorkerAsync();
-            else Functions.SortGenre(datagridBooks, cmbbxGenre, isBookmarks);
-        }
-
-        private void txtbxSearch_PlaceholderText(object sender, EventArgs e)
-        {
-            Functions.PlaceholderText(txtbxSearch, "Search for a book");
-        }
-
-        private void datagridBooks_BooksCount(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            Functions.GetNumberOfBooks(datagridBooks, lblTotal);
-        }
-
-        private void datagridBooks_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            Functions.GetNumberOfBooks(datagridBooks, lblTotal);
-        }
-
-
-        private void cmbbxGenre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
         }
 
         #endregion

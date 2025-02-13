@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ComponentFactory.Krypton.Toolkit;
 using LibrarySystem.FormsFolder;
 using LibrarySystem.SideForms;
@@ -16,6 +14,7 @@ namespace LibrarySystem.Classes
             return new T();
         }
     }
+
     public static class Forms
     {
         public static Dashboard Dashboard() => FormFactory.CreateForm<Dashboard>();

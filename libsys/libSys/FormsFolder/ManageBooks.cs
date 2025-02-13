@@ -60,6 +60,7 @@ namespace LibrarySystem
         {
             Functions.HideControls(this, btnEditBook, btnSaveNewBook);
             Functions.ShowControls(this, btnAddNewBook, btnSaveChanges);
+            Functions.RefreshTextBoxes(txtBxInitialValues);
             Functions.EnableDisableControls(true, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear, lnklblUploadImage, genreListBox, btnSaveChanges);
 
             datagridBooks.Enabled = true;
@@ -122,6 +123,21 @@ namespace LibrarySystem
             Worker.RunWorkerAsync();
         }
 
+        private void picBxRefresh_Click(object sender, EventArgs e)
+        {
+            Worker.RunWorkerAsync();
+        }
+
+        private void txtbxNumberOnly_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            KryptonTextBox txtbx = sender as KryptonTextBox;
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = true;
+            else if (char.IsDigit(e.KeyChar) && txtbx.Text.Length >= 10)
+                e.Handled = true;
+        }
+
         #region BackgroundWorker
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -174,9 +190,10 @@ namespace LibrarySystem
 
         #endregion
 
-        private void picBxRefresh_Click(object sender, EventArgs e)
+        private void txtbxSearchBar_TextChanged(object sender, EventArgs e)
         {
-            Worker.RunWorkerAsync();
+            if (txtbxSearchBar.Text == "Search for a book")
+                Functions.Search("SearchBook", txtbxSearchBar.Text, datagridBooks);
         }
     }
 }

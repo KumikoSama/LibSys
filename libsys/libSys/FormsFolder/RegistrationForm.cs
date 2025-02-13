@@ -22,6 +22,8 @@ namespace LibrarySystem
             cmbbxContactMethod.DataSource = LoadComboBox.ContactMethod();
         }
 
+        #region ClickEvents
+
         private void exitbtnapp_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -50,6 +52,30 @@ namespace LibrarySystem
             Functions.SwitchForms(Forms.FrontPage(), this);
         }
 
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            Functions.ShowControls(this, btnHidePassword);
+            Functions.HideControls(this, btnShowPassword);
+            txtbxPassword.PasswordChar = '\0';
+        }
+
+        private void btnHidePassword_Click(object sender, EventArgs e)
+        {
+            Functions.ShowControls(this, btnShowPassword);
+            Functions.HideControls(this, btnHidePassword);
+            txtbxPassword.PasswordChar = '●';
+        }
+
+        private void checkBoxCheck_Click(object sender, EventArgs e)
+        {
+            KryptonCheckBox checkBox = sender as KryptonCheckBox;
+            checkBox.Checked = !checkBox.Checked;
+        }
+
+        #endregion
+
+        #region NonClickEvents
+
         private void txtbxname_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
@@ -72,20 +98,6 @@ namespace LibrarySystem
             Application.Exit();
         }
 
-        private void btnShowPassword_Click(object sender, EventArgs e)
-        {
-            Functions.ShowControls(this, btnHidePassword);
-            Functions.HideControls(this, btnShowPassword);
-            txtbxPassword.PasswordChar = '\0';
-        }
-
-        private void btnHidePassword_Click(object sender, EventArgs e)
-        {
-            Functions.ShowControls(this, btnShowPassword);
-            Functions.HideControls(this, btnHidePassword);
-            txtbxPassword.PasswordChar = '●';
-        }
-
         private void cmbbxCountryCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Country code = cmbbxCountryCode.SelectedItem as Country;
@@ -102,11 +114,6 @@ namespace LibrarySystem
         {
             Functions.PasswordRequirements(txtbxPassword, chckBxFirstRequirement, chckBxSecondRequirement, chckBxThirdRequirement);
         }
-
-        private void checkBoxCheck_Click(object sender, EventArgs e)
-        {
-            KryptonCheckBox checkBox = sender as KryptonCheckBox;
-            checkBox.Checked = !checkBox.Checked;
-        }
+        #endregion
     }
 }

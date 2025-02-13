@@ -15,6 +15,8 @@ namespace LibrarySystem
     public class Functions
     {
         static byte[] imageBytes = null;
+        static readonly List<string> listOfGenres = new List<string>();
+        static List<string> previousSelectedGenres = new List<string>();
 
         #region FrontPage
         public static void Login(KryptonForm form, KryptonTextBox txtbxContactMethod, KryptonTextBox txtbxpass, KryptonComboBox cmbbxcurrentuser, Label errorContactMethod, Label errorPassword)
@@ -127,7 +129,11 @@ namespace LibrarySystem
 
         public static void LoadBorrowedBooks(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
-            if (Classes.CurrentUser.Role == "Member") LoadData("LoadBorrowedBooks", datagridBooks, true);
+            if (Classes.CurrentUser.Role == "Member")
+            {
+                LoadData("LoadBorrowedBooks", datagridBooks, true);
+                datagridBooks.Columns["FullName"].Visible = false;
+            }
             else LoadData("LoadBorrowedBooks", datagridBooks, false);
             lblFormChange.Text = "Borrowed Books";
         }
@@ -248,6 +254,7 @@ namespace LibrarySystem
             {
                 DataGridViewRow selectedRow = datagridBooks.SelectedRows[0];
                 int bookID = int.Parse(selectedRow.Cells["BookID"].Value.ToString());
+                int borrowID = int.Parse(selectedRow.Cells["BorrowID"].Value.ToString());
 
                 using (SqlConnection conn = new SqlConnection(GlobalConfig.ConnectionString))
                 {
@@ -255,7 +262,7 @@ namespace LibrarySystem
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@BookID", bookID);
-                        cmd.Parameters.AddWithValue("@MemberID", Classes.CurrentUser.UserID);
+                        cmd.Parameters.AddWithValue("@BorrowID", borrowID);
 
                         conn.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
@@ -277,7 +284,11 @@ namespace LibrarySystem
 
         public static void LoadTransactions(KryptonDataGridView datagridBooks, KryptonLabel lblFormChange)
         {
-            if (Classes.CurrentUser.Role == "Member") LoadData("LoadTransactions", datagridBooks, true);
+            if (Classes.CurrentUser.Role == "Member")
+            {
+                LoadData("LoadTransactions", datagridBooks, true);
+                datagridBooks.Columns["FullName"].Visible = false;
+            }
             else LoadData("LoadTransactions", datagridBooks, false);
 
             lblFormChange.Text = "Transactions";
@@ -337,9 +348,6 @@ namespace LibrarySystem
         #endregion
 
         #region AdminAccess
-
-        static readonly List<string> listOfGenres = new List<string>();
-        static List<string> previousSelectedGenres = new List<string>();
 
         public static void SettlePenaltyFees(KryptonDataGridView dataGridOverdue)
         {
@@ -627,24 +635,30 @@ namespace LibrarySystem
 
         public static void UploadImage(PictureBox bookCoverImage)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            try
             {
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp",
-                Title = "Select an Image"
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                // Display the image in the PictureBox
-                bookCoverImage.Image = new Bitmap(openFileDialog.FileName);
-                // Convert the image to a byte array
-                using (FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                //windows files pop up
+                OpenFileDialog openFileDialog = new OpenFileDialog
                 {
-                    using (BinaryReader br = new BinaryReader(fs))
-                    {
-                        imageBytes = br.ReadBytes((int)fs.Length);
-                    }
+                    Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp",
+                    Title = "Select an Image"
+                };
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Dispose the old image if there is one
+                    bookCoverImage.Image?.Dispose();
+
+                    // Display the image in the PictureBox
+                    bookCoverImage.Image = new Bitmap(openFileDialog.FileName);
+
+                    // Convert the image to a byte array
+                    imageBytes = File.ReadAllBytes(openFileDialog.FileName);
                 }
+            }
+            catch (Exception ex)
+            {
+                SideForms.CustomMessageBox.ShowOK(ex.Message, "Something went wrong", Resources.error);
             }
         }
 
@@ -658,13 +672,15 @@ namespace LibrarySystem
                     SqlCommand cmd = new SqlCommand("SaveEditedBook", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@BookID", bookId);
-                    cmd.Parameters.AddWithValue("@BookCover", imageBytes);
-                    cmd.Parameters.AddWithValue("@Title", txtbxTitle.Text);
-                    cmd.Parameters.AddWithValue("@Author", txtbxAuthor.Text);
-                    cmd.Parameters.AddWithValue("@YearOfPublication", txtbxPublishedYear.Text);
-                    cmd.Parameters.AddWithValue("@Description", txtbxDesc.Text);
-                    cmd.Parameters.AddWithValue("@Copies", txtbxCopies.Text);
+                    cmd.Parameters.AddRange(new SqlParameter[] {
+                        new SqlParameter("@BookID", bookId),
+                        new SqlParameter("@BookCover", imageBytes),
+                        new SqlParameter("@Title", txtbxTitle.Text),
+                        new SqlParameter("@Author", txtbxAuthor.Text),
+                        new SqlParameter("@YearOfPublication", txtbxPublishedYear.Text),
+                        new SqlParameter("@Description", txtbxDesc.Text),
+                        new SqlParameter("@Copies", txtbxCopies.Text)
+                    });
 
                     AddToBookGenre(bookId);
 
@@ -828,9 +844,7 @@ namespace LibrarySystem
         public static void DateChange(KryptonTextBox txtBxBorrowDuration, KryptonDateTimePicker dueDate)
         {
             if (int.TryParse(txtBxBorrowDuration.Text, out int days))
-            {
                 dueDate.Value = DateTime.Now.AddDays(days);
-            }
         }
 
         public static void LoadData(string query, KryptonDataGridView dataTable, bool isMember)

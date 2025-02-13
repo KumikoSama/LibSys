@@ -33,7 +33,6 @@
             this.lblPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.kryptonPalette2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.btnDeclinedRequests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.dataGridPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.txtbxCopies = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -52,12 +51,13 @@
             this.btnApprove = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnAllPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnGoBack = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPendingRequests)).BeginInit();
+            this.dataGridPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnGoBack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPendingRequests)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPendingRequests
@@ -178,22 +178,6 @@
             this.btnDeclinedRequests.TabIndex = 30;
             this.btnDeclinedRequests.Values.Text = "Decline Requests";
             this.btnDeclinedRequests.Click += new System.EventHandler(this.btnDeclinedRequests_Click);
-            // 
-            // dataGridPendingRequests
-            // 
-            this.dataGridPendingRequests.AllowUserToAddRows = false;
-            this.dataGridPendingRequests.AllowUserToDeleteRows = false;
-            this.dataGridPendingRequests.AllowUserToResizeColumns = false;
-            this.dataGridPendingRequests.AllowUserToResizeRows = false;
-            this.dataGridPendingRequests.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridPendingRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPendingRequests.Location = new System.Drawing.Point(12, 61);
-            this.dataGridPendingRequests.Name = "dataGridPendingRequests";
-            this.dataGridPendingRequests.Palette = this.kryptonPalette2;
-            this.dataGridPendingRequests.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.dataGridPendingRequests.Size = new System.Drawing.Size(463, 398);
-            this.dataGridPendingRequests.TabIndex = 31;
-            this.dataGridPendingRequests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPendingRequests_CellClick);
             // 
             // kryptonGroupBox1
             // 
@@ -413,14 +397,57 @@
             this.btnGoBack.TabStop = false;
             this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
             // 
+            // dataGridPendingRequests
+            // 
+            this.dataGridPendingRequests.AllowUserToAddRows = false;
+            this.dataGridPendingRequests.AllowUserToDeleteRows = false;
+            this.dataGridPendingRequests.AllowUserToResizeColumns = false;
+            this.dataGridPendingRequests.AllowUserToResizeRows = false;
+            this.dataGridPendingRequests.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridPendingRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPendingRequests.Location = new System.Drawing.Point(12, 63);
+            this.dataGridPendingRequests.MultiSelect = false;
+            this.dataGridPendingRequests.Name = "dataGridPendingRequests";
+            this.dataGridPendingRequests.Palette = this.kryptonPalette2;
+            this.dataGridPendingRequests.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.dataGridPendingRequests.ReadOnly = true;
+            this.dataGridPendingRequests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridPendingRequests.Size = new System.Drawing.Size(452, 398);
+            this.dataGridPendingRequests.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            this.dataGridPendingRequests.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.dataGridPendingRequests.StateCommon.DataCell.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.dataGridPendingRequests.StateCommon.DataCell.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.DataCell.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.DataCell.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.dataGridPendingRequests.StateCommon.DataCell.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.DataCell.Content.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.dataGridPendingRequests.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(51)))), ((int)(((byte)(53)))));
+            this.dataGridPendingRequests.StateCommon.HeaderColumn.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.HeaderColumn.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.dataGridPendingRequests.StateCommon.HeaderColumn.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.dataGridPendingRequests.StateDisabled.Background.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
+            this.dataGridPendingRequests.StateDisabled.Background.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
+            this.dataGridPendingRequests.StateDisabled.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
+            this.dataGridPendingRequests.StateDisabled.DataCell.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(82)))), ((int)(((byte)(84)))));
+            this.dataGridPendingRequests.StateDisabled.DataCell.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(192)))), ((int)(((byte)(176)))));
+            this.dataGridPendingRequests.StateDisabled.DataCell.Content.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(192)))), ((int)(((byte)(176)))));
+            this.dataGridPendingRequests.StateSelected.DataCell.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(108)))), ((int)(((byte)(56)))));
+            this.dataGridPendingRequests.TabIndex = 35;
+            this.dataGridPendingRequests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPendingRequests_CellClick);
+            // 
             // PendingRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.ClientSize = new System.Drawing.Size(980, 511);
-            this.Controls.Add(this.kryptonGroupBox1);
             this.Controls.Add(this.dataGridPendingRequests);
+            this.Controls.Add(this.kryptonGroupBox1);
             this.Controls.Add(this.lblPendingRequests);
             this.Controls.Add(this.btnGoBack);
             this.Controls.Add(this.btnDeclinedRequests);
@@ -433,13 +460,13 @@
             this.Text = "MembersInfo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MembersInfo_FormClosed);
             this.Load += new System.EventHandler(this.PendingRequests_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPendingRequests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).EndInit();
             this.kryptonGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnGoBack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPendingRequests)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,7 +485,6 @@
         private System.Windows.Forms.PictureBox btnGoBack;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblPendingRequests;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDeclinedRequests;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridPendingRequests;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette2;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxCopies;
@@ -477,5 +503,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDecline;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnApprove;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAllPendingRequests;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridPendingRequests;
     }
 }

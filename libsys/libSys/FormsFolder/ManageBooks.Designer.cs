@@ -183,6 +183,7 @@
             this.txtbxSearchBar.StateCommon.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbxSearchBar.TabIndex = 5;
             this.txtbxSearchBar.Text = "Search for a book";
+            this.txtbxSearchBar.TextChanged += new System.EventHandler(this.txtbxSearchBar_TextChanged);
             this.txtbxSearchBar.Enter += new System.EventHandler(this.txtbxSearchBar_PlaceholderText);
             this.txtbxSearchBar.Leave += new System.EventHandler(this.txtbxSearchBar_PlaceholderText);
             // 
@@ -371,6 +372,7 @@
             this.txtbxCopies.TabIndex = 37;
             this.txtbxCopies.Text = "Copies";
             this.txtbxCopies.Enter += new System.EventHandler(this.txtbxCopies_PlaceholderText);
+            this.txtbxCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxNumberOnly_KeyPress);
             this.txtbxCopies.Leave += new System.EventHandler(this.txtbxCopies_PlaceholderText);
             // 
             // bookCoverImage
@@ -396,6 +398,7 @@
             this.txtbxYear.TabIndex = 35;
             this.txtbxYear.Text = "Year of Publication";
             this.txtbxYear.Enter += new System.EventHandler(this.txtbxYear_PlaceholderText);
+            this.txtbxYear.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxNumberOnly_KeyPress);
             this.txtbxYear.Leave += new System.EventHandler(this.txtbxYear_PlaceholderText);
             // 
             // txtbxAuthor
@@ -500,7 +503,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.ClientSize = new System.Drawing.Size(980, 511);
             this.Controls.Add(this.picBxRefresh);
-            this.Controls.Add(this.btnAddNewBook);
             this.Controls.Add(this.kryptonGroupBox1);
             this.Controls.Add(this.datagridBooks);
             this.Controls.Add(this.btnDeleteBook);
@@ -508,6 +510,7 @@
             this.Controls.Add(this.btnGoBack);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtbxSearchBar);
+            this.Controls.Add(this.btnAddNewBook);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ManageBooks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
