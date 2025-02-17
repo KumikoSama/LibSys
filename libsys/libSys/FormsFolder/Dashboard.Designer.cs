@@ -33,10 +33,7 @@
             this.btnBorrow = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.btnReturn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.btnViewBook = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.datagridBooks = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
-            this.txtbxSearch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.btnSearch = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.sidebarMenuPanel = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.pctrbxLogo = new System.Windows.Forms.PictureBox();
@@ -59,7 +56,6 @@
             this.btnConfirmPayment = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnCancelRequest = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.picBxRefresh = new System.Windows.Forms.PictureBox();
-            this.cmbbxGenre = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.kryptonPalette2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.grpBxPopularBooks = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -72,6 +68,10 @@
             this.lblBookOne = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.btnViewBook = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnSearch = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.cmbbxGenre = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.txtbxSearch = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.datagridBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sidebarMenuPanel)).BeginInit();
             this.sidebarMenuPanel.SuspendLayout();
@@ -81,7 +81,6 @@
             this.kryptonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitbtnapp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBxRefresh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbbxGenre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpBxPopularBooks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpBxPopularBooks.Panel)).BeginInit();
             this.grpBxPopularBooks.Panel.SuspendLayout();
@@ -92,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbbxGenre)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBorrow
@@ -214,17 +214,6 @@
             this.btnReturn.Visible = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // btnViewBook
-            // 
-            this.btnViewBook.Location = new System.Drawing.Point(621, 101);
-            this.btnViewBook.Name = "btnViewBook";
-            this.btnViewBook.Palette = this.kryptonPalette1;
-            this.btnViewBook.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.btnViewBook.Size = new System.Drawing.Size(72, 25);
-            this.btnViewBook.TabIndex = 2;
-            this.btnViewBook.Values.Text = "View Book";
-            this.btnViewBook.Click += new System.EventHandler(this.btnViewBook_Click);
-            // 
             // datagridBooks
             // 
             this.datagridBooks.AllowUserToAddRows = false;
@@ -263,31 +252,6 @@
             this.datagridBooks.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.datagridBooks_BooksCount);
             this.datagridBooks.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.datagridBooks_RowsRemoved);
             // 
-            // txtbxSearch
-            // 
-            this.txtbxSearch.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.txtbxSearch.Location = new System.Drawing.Point(184, 101);
-            this.txtbxSearch.Name = "txtbxSearch";
-            this.txtbxSearch.Palette = this.kryptonPalette1;
-            this.txtbxSearch.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.txtbxSearch.Size = new System.Drawing.Size(363, 24);
-            this.txtbxSearch.StateCommon.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbxSearch.TabIndex = 4;
-            this.txtbxSearch.Text = "Search for a book";
-            this.txtbxSearch.Enter += new System.EventHandler(this.txtbxSearch_PlaceholderText);
-            this.txtbxSearch.Leave += new System.EventHandler(this.txtbxSearch_PlaceholderText);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(553, 101);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Palette = this.kryptonPalette1;
-            this.btnSearch.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.btnSearch.Size = new System.Drawing.Size(62, 25);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.Values.Text = "Search";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // btnPendingRequests
             // 
             this.btnPendingRequests.Location = new System.Drawing.Point(0, 363);
@@ -325,7 +289,7 @@
             this.pctrbxLogo.Image = global::libSys.Properties.Resources.photo_2024_11_26_10_04_22_removebg_preview1;
             this.pctrbxLogo.Location = new System.Drawing.Point(-18, 0);
             this.pctrbxLogo.Name = "pctrbxLogo";
-            this.pctrbxLogo.Size = new System.Drawing.Size(124, 86);
+            this.pctrbxLogo.Size = new System.Drawing.Size(124, 85);
             this.pctrbxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pctrbxLogo.TabIndex = 0;
             this.pctrbxLogo.TabStop = false;
@@ -453,7 +417,7 @@
             // lblGreeting
             // 
             this.lblGreeting.BackColor = System.Drawing.Color.Transparent;
-            this.lblGreeting.Font = new System.Drawing.Font("Baskerville Old Face", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGreeting.Font = new System.Drawing.Font("Baskerville Old Face", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGreeting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
             this.lblGreeting.Location = new System.Drawing.Point(2, 0);
             this.lblGreeting.Name = "lblGreeting";
@@ -489,7 +453,7 @@
             // 
             // lblFormChange
             // 
-            this.lblFormChange.Location = new System.Drawing.Point(145, 70);
+            this.lblFormChange.Location = new System.Drawing.Point(154, 69);
             this.lblFormChange.Name = "lblFormChange";
             this.lblFormChange.Palette = this.kryptonPalette1;
             this.lblFormChange.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -542,37 +506,13 @@
             // picBxRefresh
             // 
             this.picBxRefresh.Image = global::libSys.Properties.Resources.refresh_brown;
-            this.picBxRefresh.Location = new System.Drawing.Point(154, 103);
+            this.picBxRefresh.Location = new System.Drawing.Point(812, 102);
             this.picBxRefresh.Name = "picBxRefresh";
             this.picBxRefresh.Size = new System.Drawing.Size(24, 22);
             this.picBxRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBxRefresh.TabIndex = 34;
             this.picBxRefresh.TabStop = false;
             this.picBxRefresh.Click += new System.EventHandler(this.picBxRefresh_Click);
-            // 
-            // cmbbxGenre
-            // 
-            this.cmbbxGenre.DropDownWidth = 183;
-            this.cmbbxGenre.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
-            this.cmbbxGenre.Location = new System.Drawing.Point(699, 102);
-            this.cmbbxGenre.Name = "cmbbxGenre";
-            this.cmbbxGenre.Palette = this.kryptonPalette2;
-            this.cmbbxGenre.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.cmbbxGenre.Size = new System.Drawing.Size(94, 22);
-            this.cmbbxGenre.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.cmbbxGenre.StateCommon.ComboBox.Border.Width = 1;
-            this.cmbbxGenre.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbbxGenre.StateCommon.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
-            this.cmbbxGenre.StateCommon.Item.Content.ShortText.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbbxGenre.StateTracking.Item.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(94)))), ((int)(((byte)(49)))));
-            this.cmbbxGenre.StateTracking.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
-            this.cmbbxGenre.TabIndex = 37;
-            this.cmbbxGenre.TabStop = false;
-            this.cmbbxGenre.Text = "Sort by genre";
-            this.cmbbxGenre.SelectedIndexChanged += new System.EventHandler(this.cmbbxGenre_SelectedIndexChanged);
-            this.cmbbxGenre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbbxGenre_KeyPress);
             // 
             // kryptonPalette2
             // 
@@ -723,7 +663,7 @@
             this.lblBookThree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(94)))), ((int)(((byte)(49)))));
             this.lblBookThree.Location = new System.Drawing.Point(541, 352);
             this.lblBookThree.Name = "lblBookThree";
-            this.lblBookThree.Size = new System.Drawing.Size(227, 53);
+            this.lblBookThree.Size = new System.Drawing.Size(222, 53);
             this.lblBookThree.TabIndex = 22;
             this.lblBookThree.Text = "Title\r\nAuthor\r\nYear Published";
             this.lblBookThree.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -733,9 +673,9 @@
             this.lblBookTwo.AutoEllipsis = true;
             this.lblBookTwo.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBookTwo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(94)))), ((int)(((byte)(49)))));
-            this.lblBookTwo.Location = new System.Drawing.Point(317, 352);
+            this.lblBookTwo.Location = new System.Drawing.Point(315, 352);
             this.lblBookTwo.Name = "lblBookTwo";
-            this.lblBookTwo.Size = new System.Drawing.Size(218, 53);
+            this.lblBookTwo.Size = new System.Drawing.Size(222, 53);
             this.lblBookTwo.TabIndex = 21;
             this.lblBookTwo.Text = "Title\r\nAuthor\r\nYear Published";
             this.lblBookTwo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -812,6 +752,66 @@
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
             // 
+            // btnViewBook
+            // 
+            this.btnViewBook.Location = new System.Drawing.Point(621, 101);
+            this.btnViewBook.Name = "btnViewBook";
+            this.btnViewBook.Palette = this.kryptonPalette1;
+            this.btnViewBook.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.btnViewBook.Size = new System.Drawing.Size(72, 25);
+            this.btnViewBook.TabIndex = 2;
+            this.btnViewBook.Values.Text = "View Book";
+            this.btnViewBook.Click += new System.EventHandler(this.btnViewBook_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(553, 101);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Palette = this.kryptonPalette1;
+            this.btnSearch.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.btnSearch.Size = new System.Drawing.Size(62, 25);
+            this.btnSearch.TabIndex = 5;
+            this.btnSearch.Values.Text = "Search";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // cmbbxGenre
+            // 
+            this.cmbbxGenre.DropDownWidth = 183;
+            this.cmbbxGenre.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
+            this.cmbbxGenre.Location = new System.Drawing.Point(699, 102);
+            this.cmbbxGenre.Name = "cmbbxGenre";
+            this.cmbbxGenre.Palette = this.kryptonPalette2;
+            this.cmbbxGenre.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.cmbbxGenre.Size = new System.Drawing.Size(94, 22);
+            this.cmbbxGenre.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.cmbbxGenre.StateCommon.ComboBox.Border.Width = 1;
+            this.cmbbxGenre.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxGenre.StateCommon.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.cmbbxGenre.StateCommon.Item.Content.ShortText.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbbxGenre.StateTracking.Item.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(94)))), ((int)(((byte)(49)))));
+            this.cmbbxGenre.StateTracking.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(219)))), ((int)(((byte)(190)))));
+            this.cmbbxGenre.TabIndex = 37;
+            this.cmbbxGenre.TabStop = false;
+            this.cmbbxGenre.Text = "Sort by genre";
+            this.cmbbxGenre.SelectedIndexChanged += new System.EventHandler(this.cmbbxGenre_SelectedIndexChanged);
+            this.cmbbxGenre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbbxGenre_KeyPress);
+            // 
+            // txtbxSearch
+            // 
+            this.txtbxSearch.InputControlStyle = ComponentFactory.Krypton.Toolkit.InputControlStyle.Custom1;
+            this.txtbxSearch.Location = new System.Drawing.Point(154, 102);
+            this.txtbxSearch.Name = "txtbxSearch";
+            this.txtbxSearch.Palette = this.kryptonPalette1;
+            this.txtbxSearch.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.txtbxSearch.Size = new System.Drawing.Size(393, 24);
+            this.txtbxSearch.StateCommon.Content.Font = new System.Drawing.Font("Baskerville Old Face", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbxSearch.TabIndex = 4;
+            this.txtbxSearch.Text = "Search for a book";
+            this.txtbxSearch.Enter += new System.EventHandler(this.txtbxSearch_PlaceholderText);
+            this.txtbxSearch.Leave += new System.EventHandler(this.txtbxSearch_PlaceholderText);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -852,7 +852,6 @@
             this.kryptonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.exitbtnapp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBxRefresh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbbxGenre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpBxPopularBooks.Panel)).EndInit();
             this.grpBxPopularBooks.Panel.ResumeLayout(false);
             this.grpBxPopularBooks.Panel.PerformLayout();
@@ -864,6 +863,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbbxGenre)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -872,10 +872,7 @@
         #endregion
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnBorrow;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnReturn;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnViewBook;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView datagridBooks;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxSearch;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSearch;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnPendingRequests;
         private ComponentFactory.Krypton.Toolkit.KryptonPanel sidebarMenuPanel;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnBorrowedBooks;
@@ -899,7 +896,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnMembers;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnCancelRequest;
         private System.Windows.Forms.PictureBox picBxRefresh;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbbxGenre;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette2;
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox grpBxPopularBooks;
         private System.Windows.Forms.Label lblBookThree;
@@ -912,5 +908,9 @@
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnViewBook;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSearch;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbbxGenre;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxSearch;
     }
 }

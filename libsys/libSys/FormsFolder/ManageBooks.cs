@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using Microsoft.Data.SqlClient;
+using System.Net;
 using System.Windows.Forms;
 
 namespace LibrarySystem
@@ -24,12 +26,12 @@ namespace LibrarySystem
                 if (control is KryptonTextBox textBox)
                     txtBxInitialValues[textBox] = textBox.Text;
             }
-
-            genreListBox.DataSource = LoadComboBox.Genres();
         }
 
         private void ManageBooks_Load(object sender, EventArgs e)
         {
+            genreListBox.DataSource = LoadComboBox.Genres();
+
             if (bookCoverImage.Image != null)
                 lnklblRemoveImage.Visible = true;
             else lnklblRemoveImage.Visible = false;
@@ -86,8 +88,7 @@ namespace LibrarySystem
         private void datagridBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Functions.PopulateTextBoxes(txtbxTitle, txtbxAuthor, txtbxYear, txtbxCopies, txtbxDescription, bookCoverImage, datagridBooks, genreListBox);
-            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear,
-                lnklblUploadImage, genreListBox, btnSaveChanges);
+            Functions.EnableDisableControls(false, txtbxAuthor, txtbxCopies, txtbxDescription, txtbxTitle, txtbxDescription, txtbxYear, lnklblUploadImage, genreListBox, btnSaveChanges);
 
             txtbxDescription.SelectAll();
             txtbxDescription.SelectionAlignment = HorizontalAlignment.Center;
@@ -118,7 +119,17 @@ namespace LibrarySystem
             DataGridViewRow selectedRow = datagridBooks.SelectedRows[0];
             int bookID = int.Parse(selectedRow.Cells["BookID"].Value.ToString());
 
-            Functions.SaveBook(txtbxTitle, txtbxAuthor, txtbxYear, txtbxCopies, txtbxDescription, bookID);
+            Functions.ExecuteQuery("SaveEditedBook", new SqlParameter("@BookID", bookID),
+                new SqlParameter("@BookCover", Functions.ImageBytes),
+                new SqlParameter("@Title", txtbxTitle.Text),
+                new SqlParameter("@Author", txtbxAuthor.Text),
+                new SqlParameter("@YearOfPublication", txtbxYear.Text),
+                new SqlParameter("@Description", txtbxDescription.Text),
+                new SqlParameter("@Copies", txtbxCopies.Text));
+
+            Functions.AddToBookGenre(bookID);
+
+            SideForms.CustomMessageBox.ShowOK("Book saved successfully", "Book Changes Saved", Resources.success);
 
             Worker.RunWorkerAsync();
         }
@@ -192,7 +203,7 @@ namespace LibrarySystem
 
         private void txtbxSearchBar_TextChanged(object sender, EventArgs e)
         {
-            if (txtbxSearchBar.Text == "Search for a book")
+            if (txtbxSearchBar.Text != "Search for a book")
                 Functions.Search("SearchBook", txtbxSearchBar.Text, datagridBooks);
         }
     }

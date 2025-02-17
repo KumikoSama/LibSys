@@ -65,7 +65,7 @@
             this.btnRegister = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lblPass = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblUsername = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lblEmailorPhone = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lblContactMethod = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtbxPassword = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtbxUsername = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtbxContactMethod = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -499,7 +499,7 @@
             this.secondPanel.Controls.Add(this.btnRegister);
             this.secondPanel.Controls.Add(this.lblPass);
             this.secondPanel.Controls.Add(this.lblUsername);
-            this.secondPanel.Controls.Add(this.lblEmailorPhone);
+            this.secondPanel.Controls.Add(this.lblContactMethod);
             this.secondPanel.Controls.Add(this.txtbxPassword);
             this.secondPanel.Controls.Add(this.txtbxUsername);
             this.secondPanel.Controls.Add(this.txtbxContactMethod);
@@ -709,16 +709,16 @@
             this.lblUsername.TabIndex = 15;
             this.lblUsername.Values.Text = "Username:";
             // 
-            // lblEmailorPhone
+            // lblContactMethod
             // 
-            this.lblEmailorPhone.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
-            this.lblEmailorPhone.Location = new System.Drawing.Point(134, 124);
-            this.lblEmailorPhone.Name = "lblEmailorPhone";
-            this.lblEmailorPhone.Palette = this.kryptonPalette1;
-            this.lblEmailorPhone.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.lblEmailorPhone.Size = new System.Drawing.Size(87, 21);
-            this.lblEmailorPhone.TabIndex = 14;
-            this.lblEmailorPhone.Values.Text = "Enter Email:";
+            this.lblContactMethod.LabelStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.Custom2;
+            this.lblContactMethod.Location = new System.Drawing.Point(134, 124);
+            this.lblContactMethod.Name = "lblContactMethod";
+            this.lblContactMethod.Palette = this.kryptonPalette1;
+            this.lblContactMethod.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.lblContactMethod.Size = new System.Drawing.Size(87, 21);
+            this.lblContactMethod.TabIndex = 14;
+            this.lblContactMethod.Values.Text = "Enter Email:";
             // 
             // txtbxPassword
             // 
@@ -856,7 +856,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnRegister;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblPass;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblUsername;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblEmailorPhone;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblContactMethod;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxPassword;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxUsername;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxContactMethod;

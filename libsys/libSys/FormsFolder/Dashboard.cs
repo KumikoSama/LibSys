@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -30,15 +31,15 @@ namespace LibrarySystem
         {
             InitializeComponent();
 
-            Functions.CheckOverdue(this, btnBorrow);
             Functions.ExecuteQuery("UpdateOverdue");
             Functions.ExecuteQuery("UpdatePenaltyFees");
+            Functions.CheckOverdue(this, btnBorrow);
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            if (Classes.CurrentUser.Role == "Member")
-                lblGreeting.Text = $"Welcome to the Bookmark Library, {Classes.CurrentUser.Username}!";
+            if (CurrentUser.Role == "Member")
+                lblGreeting.Text = $"Welcome to the Bookmark Library, {CurrentUser.Username}!";
 
             cmbbxGenre.DataSource = LoadComboBox.Genres();
             Functions.ControlAccess(this, btnManage, btnBookmarks, btnBorrow, btnReturn, btnAddBookmark, btnRemoveBookmark, btnMembers);
@@ -49,8 +50,7 @@ namespace LibrarySystem
 
         private void cmbbxGenre_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbbxGenre.SelectedItem.ToString() == "All Books") Worker.RunWorkerAsync();
-            else Functions.SortGenre(datagridBooks, cmbbxGenre, isBookmarks);
+            Functions.SortGenre(datagridBooks, cmbbxGenre, isBookmarks);
         }
 
         private void txtbxSearch_PlaceholderText(object sender, EventArgs e)
@@ -68,7 +68,6 @@ namespace LibrarySystem
             Functions.GetNumberOfBooks(datagridBooks, lblTotal);
         }
 
-
         private void cmbbxGenre_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
@@ -85,8 +84,10 @@ namespace LibrarySystem
 
         private void btnViewBook_Click(object sender, EventArgs e)
         {
-            if (BookDetails.Instance == null) Functions.BookDetails(datagridBooks);
-            else BookDetails.Instance.BringToFront();
+            if (BookDetails.Instance == null) 
+                Functions.BookDetails(datagridBooks);
+            else
+                BookDetails.Instance.BringToFront();
         }
 
         private void btnBorrow_Click(object sender, EventArgs e)
@@ -113,16 +114,14 @@ namespace LibrarySystem
             currentDataLoaded = LoadedData.BorrowedBooks;
 
             Functions.LoadBorrowedBooks(datagridBooks, lblFormChange);
+            Functions.HideControls(this, btnAddBookmark, btnRemoveBookmark, btnConfirmPayment, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks, txtbxSearch, btnSearch);
 
             if (CurrentUser.Role == "Member")
-            {
-                Functions.HideControls(this, btnAddBookmark, btnRemoveBookmark, btnConfirmPayment, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
                 Functions.ShowControls(this, btnReturn);
-            }
-            else Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
 
             datagridBooks.Columns["BookID"].Visible = false;
             datagridBooks.Columns["BorrowID"].Visible = false;
+            lblFormChange.Location = new Point(154, 97);
         }
 
         private void btnAllBooks_Click(object sender, EventArgs e)
@@ -134,15 +133,16 @@ namespace LibrarySystem
             if (CurrentUser.Role == "Member")
             {
                 Functions.HideControls(this, btnRemoveBookmark, btnConfirmPayment, btnReturn, btnCancelRequest, grpBxPopularBooks);
-                Functions.ShowControls(this, btnAddBookmark, btnBorrow, btnViewBook, cmbbxGenre);
+                Functions.ShowControls(this, btnAddBookmark, btnBorrow, btnViewBook, cmbbxGenre, txtbxSearch, btnSearch);
             }
             else
             {
                 Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnCancelRequest, grpBxPopularBooks);
-                Functions.ShowControls(this, btnViewBook, cmbbxGenre);
+                Functions.ShowControls(this, btnViewBook, cmbbxGenre, txtbxSearch, btnSearch);
             }
 
             lblFormChange.Text = "All Available Books";
+            lblFormChange.Location = new Point(154, 69);
         }
 
         private void btnOverdueBooks_Click(object sender, EventArgs e)
@@ -152,16 +152,19 @@ namespace LibrarySystem
 
             if (CurrentUser.Role == "Member")
             {
-                Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
+                Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks, txtbxSearch, btnSearch);
                 datagridBooks.Columns["FullName"].Visible = false;
             }
             else
             {
-                Functions.HideControls(this, btnRemoveBookmark, btnReturn, btnBorrow, btnAddBookmark, btnViewBook, cmbbxGenre, grpBxPopularBooks);
+                Functions.HideControls(this, btnRemoveBookmark, btnReturn, btnBorrow, btnAddBookmark, btnViewBook, cmbbxGenre, grpBxPopularBooks, txtbxSearch, btnSearch);
                 Functions.ShowControls(this, btnConfirmPayment);
             }
 
             datagridBooks.Columns["BookID"].Visible = false;
+            datagridBooks.Columns["MemberID"].Visible = false;
+
+            lblFormChange.Location = new Point(154, 97);
         }
 
         private void btnBookmarks_Click(object sender, EventArgs e)
@@ -170,10 +173,11 @@ namespace LibrarySystem
             currentDataLoaded = LoadedData.Bookmarks;
             Functions.LoadData("LoadUserBookmarks", datagridBooks, true);
 
-            Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnCancelRequest, grpBxPopularBooks);
+            Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnCancelRequest, grpBxPopularBooks, txtbxSearch, btnSearch);
             Functions.ShowControls(this, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre);
 
             lblFormChange.Text = "Bookmarked Books";
+            lblFormChange.Location = new Point(154, 97);
             datagridBooks.Columns["BookmarkID"].Visible = false;
         }
 
@@ -189,9 +193,10 @@ namespace LibrarySystem
             currentDataLoaded = LoadedData.Transactions;
 
             Functions.LoadTransactions(datagridBooks, lblFormChange);
-            Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks);
+            Functions.HideControls(this, btnAddBookmark, btnReturn, btnConfirmPayment, btnRemoveBookmark, btnBorrow, btnViewBook, cmbbxGenre, btnCancelRequest, grpBxPopularBooks, txtbxSearch, btnSearch);
             
             datagridBooks.Columns["BookID"].Visible = false;
+            lblFormChange.Location = new Point(154, 97);
         }
 
         private void btnRemoveBookmark_Click(object sender, EventArgs e)
@@ -221,22 +226,25 @@ namespace LibrarySystem
         {
             SideForms.CustomMessageBox.ShowYesNo("Are you sure to clear all penalty fees?\nBy clicking yes means that the book has been returned today with the penalty fees settled.", "Confirmation",
                 Resources.question, () => Functions.SettlePenaltyFees(datagridBooks));
+            picBxRefresh_Click(sender, e);
         }
 
         private void btnPendingRequests_Click(object sender, EventArgs e)
         {
             currentDataLoaded = LoadedData.PendingRequests;
 
-            if (Classes.CurrentUser.Role == "Member")
+            if (CurrentUser.Role == "Member")
             {
                 Functions.LoadData("LoadUserPendingRequest", datagridBooks, true);
                 Functions.ShowControls(this, btnCancelRequest);
-                Functions.HideControls(this, btnBorrow, btnReturn, btnAddBookmark, btnRemoveBookmark, btnConfirmPayment, btnViewBook, cmbbxGenre, grpBxPopularBooks);
+                Functions.HideControls(this, btnBorrow, btnReturn, btnAddBookmark, btnRemoveBookmark, btnConfirmPayment, btnViewBook, cmbbxGenre, grpBxPopularBooks, txtbxSearch, btnSearch);
             }
             else
                 Functions.SwitchForms(Forms.PendingRequests(), this);
 
             datagridBooks.Columns["BookID"].Visible = false;
+            lblFormChange.Location = new Point(154, 97);
+            lblFormChange.Text = "Pending Requests";
         }
 
         private void btnMembers_Click(object sender, EventArgs e)
@@ -275,7 +283,7 @@ namespace LibrarySystem
         private void btnCancelRequest_Click(object sender, EventArgs e)
         {
             SideForms.CustomMessageBox.ShowYesNo("Are you sure you want to cancel this request?", "Borrow Request Cancellation",
-                Resources.question, () => Functions.ExecuteQuery("CancelRequest", new SqlParameter("@MemberID", Classes.CurrentUser.UserID)));
+                Resources.question, () => Functions.ExecuteQuery("CancelRequest", new SqlParameter("@MemberID", CurrentUser.UserID)));
 
             Functions.LoadData("LoadUserPendingRequest", datagridBooks, true);
         }
@@ -291,7 +299,7 @@ namespace LibrarySystem
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            e.Result = Functions.LoadAllAvailableBooks();
+            e.Result = Functions.LoadAllAvailableBooks();  
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

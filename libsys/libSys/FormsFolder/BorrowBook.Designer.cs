@@ -174,6 +174,7 @@
             this.cmbbxBorrowDuration.Palette = this.kryptonPalette1;
             this.cmbbxBorrowDuration.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.cmbbxBorrowDuration.Size = new System.Drawing.Size(178, 22);
+            this.cmbbxBorrowDuration.StateCommon.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
             this.cmbbxBorrowDuration.TabIndex = 15;
             this.cmbbxBorrowDuration.Text = "1";
             // 
@@ -267,6 +268,7 @@
             this.cmbbxCopies.Palette = this.kryptonPalette1;
             this.cmbbxCopies.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.cmbbxCopies.Size = new System.Drawing.Size(177, 22);
+            this.cmbbxCopies.StateCommon.Item.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
             this.cmbbxCopies.TabIndex = 29;
             this.cmbbxCopies.Text = "1";
             // 

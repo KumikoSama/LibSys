@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using LibrarySystem.Classes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LibrarySystem
 {
@@ -106,7 +107,23 @@ namespace LibrarySystem
 
         private void cmbbxContactMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Functions.ContactMethod(cmbbxContactMethod, cmbbxCountryCode, lblEmailorPhone, txtbxContactMethod, txtbxCode);
+            if (cmbbxContactMethod.SelectedItem.ToString() == "Email")
+            {
+                cmbbxCountryCode.Visible = false;
+                txtbxCode.Visible = false;
+                lblContactMethod.Text = "Enter your email:";
+                txtbxContactMethod.Size = new Size(249, 27);
+                txtbxContactMethod.Location = new Point(135, 151);
+            }
+            else
+            {
+                cmbbxCountryCode.Visible = true;
+                txtbxCode.Visible = true;
+                lblContactMethod.Text = "Enter your phone number:";
+                txtbxContactMethod.Size = new Size(185, 27);
+                txtbxContactMethod.Location = new Point(199, 151);
+            }
+
             txtbxContactMethod.Clear();
         }
 

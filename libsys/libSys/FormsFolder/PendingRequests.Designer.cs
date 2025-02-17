@@ -36,7 +36,6 @@
             this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
             this.txtbxCopies = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.lblMemberId = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtBxBorrowDuration = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.lblBorrowDuration = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtBxBookName = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -52,6 +51,7 @@
             this.btnAllPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnGoBack = new System.Windows.Forms.PictureBox();
             this.dataGridPendingRequests = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.lblRequestNum = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
@@ -189,9 +189,9 @@
             // kryptonGroupBox1.Panel
             // 
             this.kryptonGroupBox1.Panel.AutoScroll = true;
+            this.kryptonGroupBox1.Panel.Controls.Add(this.lblRequestNum);
             this.kryptonGroupBox1.Panel.Controls.Add(this.txtbxCopies);
             this.kryptonGroupBox1.Panel.Controls.Add(this.kryptonLabel2);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.lblMemberId);
             this.kryptonGroupBox1.Panel.Controls.Add(this.txtBxBorrowDuration);
             this.kryptonGroupBox1.Panel.Controls.Add(this.lblBorrowDuration);
             this.kryptonGroupBox1.Panel.Controls.Add(this.txtBxBookName);
@@ -222,6 +222,7 @@
             this.txtbxCopies.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtbxCopies.Size = new System.Drawing.Size(216, 24);
             this.txtbxCopies.TabIndex = 55;
+            this.txtbxCopies.TabStop = false;
             // 
             // kryptonLabel2
             // 
@@ -233,16 +234,6 @@
             this.kryptonLabel2.TabIndex = 54;
             this.kryptonLabel2.Values.Text = "Copies to borrow:";
             // 
-            // lblMemberId
-            // 
-            this.lblMemberId.Location = new System.Drawing.Point(195, 31);
-            this.lblMemberId.Name = "lblMemberId";
-            this.lblMemberId.Palette = this.kryptonPalette2;
-            this.lblMemberId.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.lblMemberId.Size = new System.Drawing.Size(85, 19);
-            this.lblMemberId.TabIndex = 53;
-            this.lblMemberId.Values.Text = "Member ID #";
-            // 
             // txtBxBorrowDuration
             // 
             this.txtBxBorrowDuration.Enabled = false;
@@ -253,6 +244,7 @@
             this.txtBxBorrowDuration.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtBxBorrowDuration.Size = new System.Drawing.Size(216, 24);
             this.txtBxBorrowDuration.TabIndex = 52;
+            this.txtBxBorrowDuration.TabStop = false;
             this.txtBxBorrowDuration.TextChanged += new System.EventHandler(this.txtBxBorrowDuration_TextChanged);
             // 
             // lblBorrowDuration
@@ -275,6 +267,7 @@
             this.txtBxBookName.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtBxBookName.Size = new System.Drawing.Size(216, 24);
             this.txtBxBookName.TabIndex = 50;
+            this.txtBxBookName.TabStop = false;
             // 
             // lblBookName
             // 
@@ -306,6 +299,7 @@
             this.txtBxMemberName.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.txtBxMemberName.Size = new System.Drawing.Size(216, 24);
             this.txtBxMemberName.TabIndex = 47;
+            this.txtBxMemberName.TabStop = false;
             // 
             // lblEstimatedDueDate
             // 
@@ -337,6 +331,7 @@
             this.dueDateEstimation.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.dueDateEstimation.Size = new System.Drawing.Size(216, 22);
             this.dueDateEstimation.TabIndex = 44;
+            this.dueDateEstimation.TabStop = false;
             // 
             // dateRequested
             // 
@@ -348,10 +343,11 @@
             this.dateRequested.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.dateRequested.Size = new System.Drawing.Size(216, 22);
             this.dateRequested.TabIndex = 43;
+            this.dateRequested.TabStop = false;
             // 
             // btnDecline
             // 
-            this.btnDecline.Location = new System.Drawing.Point(236, 337);
+            this.btnDecline.Location = new System.Drawing.Point(244, 337);
             this.btnDecline.Name = "btnDecline";
             this.btnDecline.Palette = this.kryptonPalette2;
             this.btnDecline.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -362,7 +358,7 @@
             // 
             // btnApprove
             // 
-            this.btnApprove.Location = new System.Drawing.Point(166, 337);
+            this.btnApprove.Location = new System.Drawing.Point(174, 337);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Palette = this.kryptonPalette2;
             this.btnApprove.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
@@ -440,6 +436,18 @@
             this.dataGridPendingRequests.TabIndex = 35;
             this.dataGridPendingRequests.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPendingRequests_CellClick);
             // 
+            // lblRequestNum
+            // 
+            this.lblRequestNum.AutoEllipsis = true;
+            this.lblRequestNum.Font = new System.Drawing.Font("Baskerville Old Face", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRequestNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(36)))), ((int)(((byte)(38)))));
+            this.lblRequestNum.Location = new System.Drawing.Point(3, 25);
+            this.lblRequestNum.Name = "lblRequestNum";
+            this.lblRequestNum.Size = new System.Drawing.Size(476, 29);
+            this.lblRequestNum.TabIndex = 56;
+            this.lblRequestNum.Text = "Request #";
+            this.lblRequestNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PendingRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,7 +497,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonGroupBox kryptonGroupBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtbxCopies;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblMemberId;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtBxBorrowDuration;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblBorrowDuration;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtBxBookName;
@@ -504,5 +511,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnApprove;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnAllPendingRequests;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dataGridPendingRequests;
+        private System.Windows.Forms.Label lblRequestNum;
     }
 }

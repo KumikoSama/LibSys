@@ -46,12 +46,12 @@ namespace LibrarySystem
 
         private void dataGridPendingRequests_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Functions.PopulateRequestForm(dataGridPendingRequests, txtBxMemberName, txtBxBookName, txtbxCopies, txtBxBorrowDuration, dateRequested);
+            Functions.PopulateRequestForm(dataGridPendingRequests, txtBxMemberName, txtBxBookName, txtbxCopies, txtBxBorrowDuration, dateRequested, lblRequestNum);
         }
 
         private void btnDeclinedRequests_Click(object sender, EventArgs e)
         {
-            Functions.ClearTextBoxes(this, txtBxBookName, txtBxBorrowDuration, txtbxCopies, txtBxMemberName);
+            Functions.ClearTextBoxes(0, txtBxBookName, txtBxBorrowDuration, txtbxCopies, txtBxMemberName);
             Functions.LoadData("LoadDeclinedRequests", dataGridPendingRequests, false);
             Functions.ShowControls(this, btnAllPendingRequests);
             Functions.HideControls(this, btnDecline, btnApprove, btnDecline, dueDateEstimation, lblEstimatedDueDate, btnDeclinedRequests);
@@ -59,11 +59,12 @@ namespace LibrarySystem
             lblPendingRequests.Text = "Declined Requests";
             dataGridPendingRequests.Columns["MemberID"].Visible = false;
             dataGridPendingRequests.Columns["BookID"].Visible = false;
+            dataGridPendingRequests.Columns["RequestID"].Visible = false;
         }
 
         private void btnAllPendingRequests_Click(object sender, EventArgs e)
         {
-            Functions.ClearTextBoxes(this, txtBxBookName, txtBxBorrowDuration, txtbxCopies, txtBxMemberName);
+            Functions.ClearTextBoxes(0, txtBxBookName, txtBxBorrowDuration, txtbxCopies, txtBxMemberName);
             Functions.LoadPendingRequests(dataGridPendingRequests);
             Functions.HideControls(this, btnAllPendingRequests);
             Functions.ShowControls(this, btnDecline, btnApprove, btnDecline, dueDateEstimation, lblEstimatedDueDate, btnDeclinedRequests);

@@ -2,7 +2,6 @@
 using libSys.Properties;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -231,6 +230,7 @@ namespace LibrarySystem.Classes
                         {
                             ErrorTextBoxes(false, errorContactMethod, txtbxcontactmethod);
                             ErrorTextBoxes(false, errorPassword, txtbxpass);
+                            SideForms.CustomMessageBox.ShowOK("No accounts matched.", "Error", Resources.error);
 
                             return false;
                         }
